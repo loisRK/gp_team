@@ -26,7 +26,7 @@ class auto_w(QMainWindow,Ui_MainWindow): #class name 변경
     def start(self):
 
         FS = Find_Store()
-        FS.play()
+        FS.play(self.Input_Store.text())
 
 
 
