@@ -24,6 +24,7 @@ class auto_w(QMainWindow,Ui_MainWindow): #class name 변경
 
     # 실행에 필요한 모든 코드들은 전부 start() 함수에 모두 삽입
     def start(self):
+
         FS = Find_Store()
         FS.play()
 
