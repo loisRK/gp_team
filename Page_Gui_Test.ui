@@ -181,7 +181,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="Find_Store_Butten">
+   <widget class="QPushButton" name="Find_Store_Btn">
     <property name="geometry">
      <rect>
       <x>730</x>
@@ -274,8 +274,8 @@
     <widget class="QPushButton" name="Positive_Review_Image_Detail">
      <property name="geometry">
       <rect>
-       <x>89</x>
-       <y>278</y>
+       <x>80</x>
+       <y>280</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -372,18 +372,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>Find_Store_Butten</sender>
+   <sender>Find_Store_Btn</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>start()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>765</x>
-     <y>105</y>
+     <x>767</x>
+     <y>114</y>
     </hint>
     <hint type="destinationlabel">
-     <x>821</x>
-     <y>113</y>
+     <x>774</x>
+     <y>205</y>
     </hint>
    </hints>
   </connection>
