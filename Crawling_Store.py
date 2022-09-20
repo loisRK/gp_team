@@ -82,7 +82,3 @@ class Find_Store():
         print('for')
 
         print(review_list)
-
-        driver.find_element_by_xpath('//*[@id="category"]/ul/li[15]/form/div/input').send_keys("비어킹")
-        time.sleep(3)
-
