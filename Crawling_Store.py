@@ -35,5 +35,5 @@ class Find_Store():
         driver.find_element_by_xpath('//*[@id="category"]/ul/li[1]/a').click()
         time.sleep(1)
         driver.find_element_by_xpath('//*[@id="category"]/ul/li[15]/form/div/input').click()
-        driver.find_element_by_xpath('//*[@id="category"]/ul/li[15]/form/div/input').send_keys("오봉집")
+        driver.find_element_by_xpath('//*[@id="category"]/ul/li[15]/form/div/input').send_keys("비어킹")
         time.sleep(3)
