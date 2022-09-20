@@ -38,6 +38,7 @@ class Find_Store():
         time.sleep(3)
         # 검색버튼 클릭 후 입력받은 가게명 검색창에 입력
         driver.find_element_by_xpath('//*[@id="category"]/ul/li[15]/form/div/input').click()
+
         driver.find_element_by_xpath('//*[@id="category"]/ul/li[15]/form/div/input').send_keys(sname)
         time.sleep(3)
         # search 버튼 클릭
@@ -81,3 +82,7 @@ class Find_Store():
         print('for')
 
         print(review_list)
+
+        driver.find_element_by_xpath('//*[@id="category"]/ul/li[15]/form/div/input').send_keys("비어킹")
+        time.sleep(3)
+
