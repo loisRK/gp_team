@@ -78,14 +78,14 @@ class Find_Store():
         if c > 33:
             for r in range(2, 33):
                 review_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/p').text)
-                star_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[2]/div').text)
                 menu_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[3]').text)
+                star_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[2]/div/span[1]/span[contains(@class, "full ng-scope")]').text)
         elif c == 0:
             pass
         else:
             for r in range(2, c+2):
                 review_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/p').text)
-                star_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[2]/div').text)
+                star_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[2]/div/span[1]/span[contains(@class, "full ng-scope")]').text)
                 menu_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[3]').text)
 
         print(review_list)
