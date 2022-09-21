@@ -8,9 +8,10 @@ class data_frame:
         self.menu = []
 
     def make_csv(self, review, star, menu):
-        # data = {'review' : review, 'star' : star, 'menu' : menu}
-        df = pd.DataFrame([review, star, menu], columns=['review', 'star', 'menu'])
-        print(df)
+        global store_df
+        data = {'review' : review, 'star' : star, 'menu' : menu}
+        store_df = pd.DataFrame(data)
+        print(store_df.head())
 
     def review_pre(self, review):
         print('review')
