@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>841</width>
-    <height>774</height>
+    <width>832</width>
+    <height>869</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,7 +37,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>197</y>
+      <y>202</y>
       <width>81</width>
       <height>30</height>
      </rect>
@@ -69,7 +69,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>총 별점</string>
+     <string>사이트 별점</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="Store_Name">
@@ -87,7 +87,7 @@
      <rect>
       <x>420</x>
       <y>245</y>
-      <width>401</width>
+      <width>381</width>
       <height>20</height>
      </rect>
     </property>
@@ -115,9 +115,9 @@
    <widget class="QLineEdit" name="Review_Count_total">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>287</y>
-      <width>113</width>
+      <x>690</x>
+      <y>204</y>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
@@ -125,8 +125,8 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>279</y>
+      <x>601</x>
+      <y>200</y>
       <width>81</width>
       <height>30</height>
      </rect>
@@ -151,9 +151,9 @@
    <widget class="QLineEdit" name="Negative_Review">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>332</y>
-      <width>113</width>
+      <x>690</x>
+      <y>330</y>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
@@ -161,9 +161,9 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>330</y>
-      <width>91</width>
+      <x>596</x>
+      <y>326</y>
+      <width>90</width>
       <height>30</height>
      </rect>
     </property>
@@ -226,91 +226,6 @@
      <string>찾는 음식점</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>9</x>
-      <y>389</y>
-      <width>821</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-    <widget class="QWidget" name="gridLayoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>21</y>
-       <width>261</width>
-       <height>251</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="Positive_Review_Image"/>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>22</y>
-       <width>261</width>
-       <height>251</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="Review_Image"/>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_3">
-     <property name="geometry">
-      <rect>
-       <x>550</x>
-       <y>22</y>
-       <width>261</width>
-       <height>251</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="Negative_Review_Image"/>
-    </widget>
-    <widget class="QPushButton" name="Positive_Review_Image_Detail">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>280</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>자세히 보기</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="Review_Image_Detail">
-     <property name="geometry">
-      <rect>
-       <x>360</x>
-       <y>278</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>자세히 보기</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="Negative_Review_Image_Detail">
-     <property name="geometry">
-      <rect>
-       <x>630</x>
-       <y>278</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>자세히 보기</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
@@ -356,18 +271,122 @@
      <string>다음</string>
     </property>
    </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>390</y>
+      <width>811</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Tab 1</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>10</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="graphicsView_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>331</width>
+        <height>381</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="graphicsView_3">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>10</y>
+        <width>331</width>
+        <height>381</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+     <widget class="QGraphicsView" name="graphicsView_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>381</width>
+        <height>361</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="graphicsView_5">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>20</y>
+        <width>381</width>
+        <height>361</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QLineEdit" name="Star_Total_2">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>292</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>598</x>
+      <y>287</y>
+      <width>81</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>학습한 별점</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>841</width>
+     <width>832</width>
      <height>26</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionshow">
+   <property name="text">
+    <string>show</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>

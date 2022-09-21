@@ -1,19 +1,10 @@
 # -- coding: utf-8 --
 
-import sys
-
-from PyQt5 import *
-from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from Page_Gui_Test import Ui_MainWindow #앞의 파일명 동일 kinwriter_python 만 변경
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver import ActionChains
-from selenium import webdriver
-import time
-import pyperclip
-from bs4 import BeautifulSoup
-import pyautogui
 from Crawling_Store import Find_Store
+from data_preprocessing import data_frame
+
 
 class auto_w(QMainWindow,Ui_MainWindow): #class name 변경
     def __init__(self):
@@ -27,6 +18,13 @@ class auto_w(QMainWindow,Ui_MainWindow): #class name 변경
 
         FS = Find_Store()
         FS.play(self.Input_Store.text())
+        review_l, review_s, review_m = FS.print_review()
+
+        review = data_frame()
+        review.review_pre(review_l)
+        review.star_pre(review_s)
+        review.menu_pre(review_m)
+        review.make_csv(review_l, review_s, review_m)
 
 
 
