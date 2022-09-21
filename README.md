@@ -15,3 +15,5 @@ machine learning team project
 
 - chromedriver.exe : 크롬 실행 응용프로그램
 - uic.exe : designer 파일 변환 응용프로그램
+
+gj test
