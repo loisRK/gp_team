@@ -1,9 +1,6 @@
 # 필요한 모듈 호출
-
-
 from selenium import webdriver
 import time
-
 
 
 class Find_Store():

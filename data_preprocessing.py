@@ -9,8 +9,8 @@ class data_frame:
 
     def make_csv(self, review, star, menu):
         # data = {'review' : review, 'star' : star, 'menu' : menu}
-        df = pd.DataFrame([[review],[star],[menu]], columns=['review', 'star', 'menu'])
-        df.head()
+        df = pd.DataFrame([review, star, menu], columns=['review', 'star', 'menu'])
+        print(df)
 
     def review_pre(self, review):
         print('review')
