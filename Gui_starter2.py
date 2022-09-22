@@ -20,10 +20,9 @@ class auto_w(QMainWindow,Ui_MainWindow): #class name 변경
         FS.play(self.Input_Store.text())
 
         # GUI : 빈칸 채우기 반환값
-        self.Store_Name.setText(self.Input_Store.text())    # GUI: 가게이름
+        self.Store_Name.setText(FS.Store_Name)    # GUI: 가게이름
         self.Review_Count_total.setText(FS.Comment_Total)   # GUI: Total Comment
         self.Star_Total.setText(FS.Star_Total)  # GUI: 총 평점
-
 
 
 
