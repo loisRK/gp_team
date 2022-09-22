@@ -49,22 +49,34 @@ class Find_Store():
         time.sleep(3)
 
         # 더보기 클릭하여 댓글 30개 펼치기
-        if driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').is_enabled():
+        if driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').is_displayed():
             driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').click()
+            print('if1')
             time.sleep(3)
+        elif driver.find_element_by_xpath('//*[@id="review"]/li[contains(@class,"list-group-item btn-more ng-hide")').is_displayed():
+            pass
         else:       # 댓글이 10개 미만인 경우 에러가 발생하지 않도록 pass
+            print('else1')
             pass
 
-        if driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').is_enabled():
+        if driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').is_displayed():
             driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').click()
+            print('if2')
             time.sleep(3)
+        elif driver.find_element_by_xpath('//*[@id="review"]/li[contains(@class,"list-group-item btn-more ng-hide")').is_displayed():
+            pass
         else:
+            print('else2')
             pass
 
-        if driver.find_element_by_xpath('//*[@id="review"]/li[32]/a').is_enabled():
+        if driver.find_element_by_xpath('//*[@id="review"]/li[32]/a').is_displayed():
             driver.find_element_by_xpath('//*[@id="review"]/li[32]/a').click()
+            print('if3')
             time.sleep(3)
+        elif driver.find_element_by_xpath('//*[@id="review"]/li[contains(@class,"list-group-item btn-more ng-hide")').is_displayed():
+            pass
         else:
+            print('else3')
             pass
 
         print(type(count))
