@@ -15,3 +15,6 @@ machine learning team project
 
 - chromedriver.exe : 크롬 실행 응용프로그램
 - uic.exe : designer 파일 변환 응용프로그램
+
+- Sentiment 모델 다운로드 링크 (sentiment_model.h5, embedding.csv)
+https://drive.google.com/drive/folders/1cn9ZR3wV6WRPuKWvNZ69ncUPjHLlSwfS?usp=sharing
