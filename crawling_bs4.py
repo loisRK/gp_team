@@ -12,15 +12,14 @@ class Find_Store2():
         self.Comment_Total = None
         self.Store_Name = None
         self.Star_Total = None
+        self.review_list = None     # 데이터 전처리용 변수
+        self.star_list = None       # 데이터 전처리용 변수
+        self.menu_list = None       # 데이터 전처리용 변수
+        self.star_opt = None        # 데이터 전처리용 변수
         self.Positive_Review = None     # 모델학습결과 넣을 변수
         self.Negative_Review = None     # 모델학습결과 넣을 변수
 
     def play(self, sname):
-
-        global review_list
-        global star_list
-        global menu_list
-        global star_total_list
 
         # 크롤링 작업
         Store_link = "https://www.yogiyo.co.kr/mobile/#/"
@@ -61,27 +60,22 @@ class Find_Store2():
 
         # click 조건
         if int(self.Comment_Total) > 30:
-            print('1')
             driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').click()
             time.sleep(3)
-            print('2')
             driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').click()
             time.sleep(3)
-            print('3')
             driver.find_element_by_xpath('//*[@id="review"]/li[32]/a').click()
         elif 31 > int(self.Comment_Total) > 20:
-            print('4')
             driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').click()
             time.sleep(3)
             driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').click()
         elif 21 > int(self.Comment_Total) > 10:
-            print('5')
             driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').click()
         else:
-            print('6')
             pass
 
         time.sleep(3)
+
         # selenium 작업으로 더보기 펼친 후 html 긁어오기
         html = driver.page_source
         print('html')
@@ -121,4 +115,4 @@ class Find_Store2():
         print(star_opt)
 
     def print_review(self):
-        return review_list, star_list, menu_list
+        return self.review_list, self.menu_list, self.star_list, self.star_opt
