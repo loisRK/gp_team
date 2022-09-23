@@ -11,17 +11,18 @@ class Find_Store2():
 
     def __init__(self):
         super().__init__()
-        self.Store_Name = ""
-        self.Store_Address = ""
-        self.Star_Total = ""
-        self.Review_Count = ""
-        self.Positive_Review = ""
+
+        self.Comment_Total = None
+        self.Store_Name = None
+        self.Star_Total = None
+        self.review_list = None     # 데이터 전처리용 변수
+        self.star_list = None       # 데이터 전처리용 변수
+        self.menu_list = None       # 데이터 전처리용 변수
+        self.star_opt = None        # 데이터 전처리용 변수
+        self.Positive_Review = None     # 모델학습결과 넣을 변수
+        self.Negative_Review = None     # 모델학습결과 넣을 변수
 
     def play(self, sname):
-
-        global review_list
-        global star_list
-        global menu_list
 
         # 크롤링 작업
         Store_link = "https://www.yogiyo.co.kr/mobile/#/"
@@ -43,6 +44,7 @@ class Find_Store2():
         driver.find_element_by_xpath('//*[@id="category_search_button"]').click()
         time.sleep(3)
         print('test')
+
 
 
         # 가게 여부를 확인해주는 변수 check_store
@@ -68,26 +70,6 @@ class Find_Store2():
             # 가게 정보 긁어오기
             self.Star_Total = driver.find_element_by_xpath('//*[@id="content"]/div[2]/div[1]/div[5]/div[1]/div/div/strong').text
             self.Comment_Total = driver.find_element_by_xpath('//*[@id="content"]/div[2]/div[1]/ul/li[2]/a/span').text
-
-            # 더보기 클릭하여 댓글 30개 펼치기----------------------------------------------------------------------------------
-            # if driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').is_enabled():
-            #     driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').click()
-            #     time.sleep(3)
-            # else:       # 댓글이 10개 미만인 경우 에러가 발생하지 않도록 pass
-            #     pass
-            #
-            # if driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').is_enabled():
-            #     driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').click()
-            #     time.sleep(3)
-            # else:
-            #     pass
-            #
-            # if driver.find_element_by_xpath('//*[@id="review"]/li[32]/a').is_enabled():
-            #     driver.find_element_by_xpath('//*[@id="review"]/li[32]/a').click()
-            #     time.sleep(3)
-            # else:
-            #     pass
-            #--------------------------------------------------------------------------------------------------------------
 
             print("더보기란 클릭 시작")
             # 여기서 수정한 if문 넣기------------------------------------------------------------------------------------------
@@ -118,40 +100,44 @@ class Find_Store2():
                     break
             print('더보기란 클릭 완료')
             #--------------------------------------------------------------------------------------------------------------
+# selenium 작업으로 더보기 펼친 후 html 긁어오기
+        html = driver.page_source
+        print('html')
+        print(html)
 
-            # selenium 작업으로 더보기 펼친 후 html 긁어오기
-            html = driver.page_source
-            print('html 수집')
+        soup = BeautifulSoup(html, 'html.parser')
+        # id=review 인 ul 태그 가져오기
+        review_tag = soup.select_one("ul.list-group.review-list")
+        # print(review_tag)
 
-            soup = BeautifulSoup(html, 'html.parser')
-            # id=review 인 ul 태그 가져오기
-            review_tag = soup.select_one("ul.list-group.review-list")
-            # print(review_tag)
+        review_list = []
+        menu_list = []
+        star_list = []
+        star_opt = []
 
-            review_list = []
-            star_list = []
-            menu_list = []
-            # ul tag 중 원하는 tag 가져오기
-            for p in review_tag.select('p.review.comment'):
-                review_list.append(p)
-                print(review_list)
-            # all_review_comment = review_tag.select('#review > li:nth-child(2) > p')
-            # print(type(all_review_comment))
-            # all_star_comment = review_tag.select('#review > li:nth-child(2) > div:nth-child(2)')
-            # print(type(all_star_comment))
-            # all_menu_comment = review_tag.select('#review > li:nth-child(2) > div.order-items.default.ng-binding')
-            # print(all_menu_comment)
+        # ul tag 중 원하는 tag 가져오기
+        for p in review_tag.find_all("p", class_="ng-binding", attrs={"ng-show":"review.comment"}):
+            review_list.append(p.get_text())
+        print(review_list)
 
+        # 리뷰 메뉴
+        for div in review_tag.select('div.order-items.default.ng-binding'):
+            menu_list.append(div.get_text())
+        print(menu_list)
 
-            # beautifulsoup_html 정보 분석
-            # beautifulsoup_select_one() 함수
-            # review_list = soup.findAll('span', class_='full ng-scope')
+        # 리뷰 total star
+        for s in review_tag.select('div.star-point > span.total'):
+            star = ""
+            for st in s.select('span.full.ng-scope'):
+                star += st.get_text()
+            star_list.append(star)
+        print(star_list)
 
-            # print(review_list)
-            # print(star_list)
-            # print(menu_list)
+        # 리뷰 품목별 star
+        for s in review_tag.select('div.star-point > span.category'):
+            star_opt.append(s.get_text())
+        print(star_opt)
 
-            driver.quit()
 
     def print_review(self):
-        return review_list, star_list, menu_list
+        return self.review_list, self.menu_list, self.star_list, self.star_opt
