@@ -50,6 +50,7 @@ class data_frame:
         lobel_loc = np.linspace(start=0, stop=2 * np.pi, num=len(var_data1))
 
         ax = plt.subplot(polar=True)
+        ax.set_theta_offset(pi / 2)  ## 시작점
         plt.xticks(lobel_loc, labels=var1, color='gray', size=10)
 
         ax.plot(lobel_loc, var_data1, linestyle='solid', color='green')
