@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-# from konlpy.tag import Okt
+from konlpy.tag import Okt
 from collections import Counter
 from wordcloud import WordCloud
 import matplotlib
@@ -22,15 +22,22 @@ class data_frame:
         return store_df
 
     def review_pre(self, review):
-        print('menu')
-        print(menu)
+        engine = Okt()
+        all_nouns = engine.nouns(''.join(review))
+        nouns = [n for n in all_nouns if len(n) > 1]
+        count = Counter(nouns)
+        tags = count.most_common(100)
+        wc = WordCloud(font_path='malgun', background_color='white', colormap='magma', width=2500,
+                       height=1500)
+        cloud = wc.generate_from_frequencies(dict(tags))
+        plt.imshow(cloud, interpolation='bilinear')
+        plt.axis('off')
+        return plt.show()
 
     def star_pre(self, star):
         df = pd.Series(star)
         df = pd.DataFrame(df, columns=['star'])
-        data = df.star.str.split(' ')
-        df['overall'] = data.str.get(0)
-        df['overall'] = df['overall'].apply(lambda x: x.count('★'))
+        data = df.star.str.split('\n')
         df['taste'] = data.str.get(3).astype('float')
         df['amount'] = data.str.get(6).astype('float')
         df['delivery'] = data.str.get(9).astype('float')
@@ -41,14 +48,12 @@ class data_frame:
         var_data1 = [*var_data, var_data[0]]
 
         lobel_loc = np.linspace(start=0, stop=2 * np.pi, num=len(var_data1))
-        # plt.rc('font', family='malgun')
 
         ax = plt.subplot(polar=True)
         plt.xticks(lobel_loc, labels=var1, color='gray', size=10)
 
-        ax.plot(lobel_loc, var_data1, linestyle='solid', color='violet')
-        ax.fill(lobel_loc, var_data1, 'violet', alpha=0.3)
-        return plt.show()
+        ax.plot(lobel_loc, var_data1, linestyle='solid', color='green')
+        ax.fill(lobel_loc, var_data1, 'green', alpha=0.3)
     def menu_pre(self, menu):
         print('menu')
         print(menu)
