@@ -7,6 +7,8 @@ from crawling_bs4 import Find_Store2
 import os
 import sys
 from data_preprocessing import data_frame
+from sentiment_model import Sentiment
+import pandas as pd
 
 # 파일 불러오는 함수 생성
 def resource_path(relative_path):
@@ -45,6 +47,15 @@ class auto_w(QMainWindow,form_class): #class name 변경
         review.star_pre(star_t)
 
         review.make_csv(review, menu, star_t, star_opt)
+
+        # 모델 실행
+        model = Sentiment()
+        review_sample = pd.DataFrame(review, columns=['review'])
+        print("Model predicting...")
+        output = model.get_score(review_sample)
+        print("********** 모델 결과 ***********")
+        print(output)
+        print("*******************************")
 
 
 app = QApplication([])
