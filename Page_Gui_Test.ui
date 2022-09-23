@@ -6,20 +6,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>841</width>
-    <height>774</height>
+    <width>832</width>
+    <height>869</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:rgb(255, 255, 255);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>410</x>
       <y>10</y>
-      <width>751</width>
+      <width>301</width>
       <height>61</height>
      </rect>
     </property>
@@ -29,47 +32,61 @@
       <pointsize>20</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">   color: black;
+   background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(0, 0, 0, 0), stop:0.52 rgba(0, 0, 0, 0), stop:0.565 rgba(82, 121, 76, 33), stop:0.65 rgba(159, 235, 148, 64), stop:0.721925 rgba(255, 238, 150, 129), stop:0.77 rgba(255, 128, 128, 204), stop:0.89 rgba(191, 128, 255, 64), stop:1 rgba(0, 0, 0, 0));
+   border-radius: 30px;</string>
+    </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:26pt; font-weight:600;&quot;&gt;음식점 정보&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'휴먼둥근헤드라인'; font-size:20pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;음식점 정보&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>197</y>
-      <width>81</width>
+      <x>300</x>
+      <y>200</y>
+      <width>111</width>
       <height>30</height>
      </rect>
     </property>
-    <property name="text">
-     <string>음식점 이름</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>240</y>
-      <width>81</width>
-      <height>30</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(170, 0, 255);
+background-color: white;
+border: 2px solid rgb(170, 0, 255);
+border-radius: 15px;</string>
     </property>
     <property name="text">
-     <string>음식점 위치</string>
+     <string>STORE NAME</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>300</x>
       <y>283</y>
-      <width>81</width>
+      <width>111</width>
       <height>30</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(170, 0, 255);
+background-color: white;
+border: 2px solid rgb(170, 0, 255);
+border-radius: 15px;</string>
+    </property>
     <property name="text">
-     <string>총 별점</string>
+     <string>사이트 별점</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="Store_Name">
@@ -82,21 +99,11 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="Store_Address">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>245</y>
-      <width>401</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="Star_Total">
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>285</y>
+      <y>288</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -111,13 +118,16 @@
       <height>231</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-image:url(&quot;C:/Users/loisk/PycharmProjects/gp_team/yj.jpg&quot;);</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="Review_Count_total">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>287</y>
-      <width>113</width>
+      <x>690</x>
+      <y>204</y>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
@@ -125,35 +135,53 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>279</y>
-      <width>81</width>
+      <x>570</x>
+      <y>200</y>
+      <width>111</width>
       <height>30</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(170, 0, 255);
+background-color: white;
+border: 2px solid rgb(170, 0, 255);
+border-radius: 15px;</string>
+    </property>
     <property name="text">
-     <string>총 댓글 수</string>
+     <string>Total Comment</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>325</y>
-      <width>91</width>
+      <x>300</x>
+      <y>320</y>
+      <width>111</width>
       <height>30</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(170, 0, 255);
+background-color: white;
+border: 2px solid rgb(170, 0, 255);
+border-radius: 15px;</string>
+    </property>
     <property name="text">
      <string>긍정 댓글 수</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="Negative_Review">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>332</y>
-      <width>113</width>
+      <x>691</x>
+      <y>325</y>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
@@ -161,31 +189,40 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>330</y>
-      <width>91</width>
+      <x>570</x>
+      <y>320</y>
+      <width>111</width>
       <height>30</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(170, 0, 255);
+background-color: white;
+border: 2px solid rgb(170, 0, 255);
+border-radius: 15px;</string>
+    </property>
     <property name="text">
      <string>부정 댓글 수</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="Positive_Review">
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>330</y>
+      <y>326</y>
       <width>113</width>
       <height>20</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="Find_Store_Butten">
+   <widget class="QPushButton" name="Find_Store_Btn">
     <property name="geometry">
      <rect>
-      <x>730</x>
-      <y>74</y>
+      <x>720</x>
+      <y>77</y>
       <width>91</width>
       <height>41</height>
      </rect>
@@ -196,8 +233,13 @@
       <pointsize>16</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+	background-color: rgb(170, 0, 255);
+	border-radius: 20px;</string>
+    </property>
     <property name="text">
-     <string>검색</string>
+     <string>search</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="Input_Store">
@@ -216,107 +258,31 @@
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>82</y>
-      <width>91</width>
+      <x>300</x>
+      <y>80</y>
+      <width>111</width>
       <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(170, 0, 255);
+background-color: white;
+border: 2px solid rgb(170, 0, 255);
+border-radius: 15px;</string>
+    </property>
     <property name="text">
-     <string>찾는 음식점</string>
+     <string>STORE</string>
     </property>
-   </widget>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>9</x>
-      <y>389</y>
-      <width>821</width>
-      <height>321</height>
-     </rect>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
-    <property name="title">
-     <string/>
-    </property>
-    <widget class="QWidget" name="gridLayoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>21</y>
-       <width>261</width>
-       <height>251</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="Positive_Review_Image"/>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>22</y>
-       <width>261</width>
-       <height>251</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="Review_Image"/>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget_3">
-     <property name="geometry">
-      <rect>
-       <x>550</x>
-       <y>22</y>
-       <width>261</width>
-       <height>251</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="Negative_Review_Image"/>
-    </widget>
-    <widget class="QPushButton" name="Positive_Review_Image_Detail">
-     <property name="geometry">
-      <rect>
-       <x>89</x>
-       <y>278</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>자세히 보기</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="Review_Image_Detail">
-     <property name="geometry">
-      <rect>
-       <x>360</x>
-       <y>278</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>자세히 보기</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="Negative_Review_Image_Detail">
-     <property name="geometry">
-      <rect>
-       <x>630</x>
-       <y>278</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>자세히 보기</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>130</y>
-      <width>491</width>
+      <x>350</x>
+      <y>160</y>
+      <width>431</width>
       <height>23</height>
      </rect>
     </property>
@@ -356,34 +322,217 @@
      <string>다음</string>
     </property>
    </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>811</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Tab 1</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>10</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="graphicsView_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>80</y>
+        <width>331</width>
+        <height>251</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="graphicsView_3">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>80</y>
+        <width>331</width>
+        <height>251</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>271</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>사이트 평점 Vs. 학습한 평점 비교</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+     <widget class="QGraphicsView" name="graphicsView_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>371</width>
+        <height>331</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="graphicsView_5">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>30</y>
+        <width>341</width>
+        <height>331</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>부정 WordCloud</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>10</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>긍정 WordCloud</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Tab 3</string>
+     </attribute>
+     <widget class="QListView" name="listView">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>30</y>
+        <width>431</width>
+        <height>301</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>20</y>
+        <width>171</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>MENU TOP 5</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QLineEdit" name="Star_Total_2">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>284</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>280</y>
+      <width>111</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(170, 0, 255);
+background-color: white;
+border: 2px solid rgb(170, 0, 255);
+border-radius: 15px;</string>
+    </property>
+    <property name="text">
+     <string>학습한 별점</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>841</width>
+     <width>832</width>
      <height>26</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionshow">
+   <property name="text">
+    <string>show</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>Find_Store_Butten</sender>
+   <sender>Find_Store_Btn</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>start()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>765</x>
-     <y>105</y>
+     <x>767</x>
+     <y>114</y>
     </hint>
     <hint type="destinationlabel">
-     <x>821</x>
-     <y>113</y>
+     <x>774</x>
+     <y>205</y>
     </hint>
    </hints>
   </connection>
