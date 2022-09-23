@@ -28,8 +28,7 @@ class auto_w(QMainWindow,Ui_MainWindow): #class name 변경
 
 
 
-
-app =QApplication([])
+app = QApplication([])
 main_dialog = auto_w() #해당부분 위 class name과 동일하게 작성
 QApplication.processEvents()
 app.exit(app.exec_())

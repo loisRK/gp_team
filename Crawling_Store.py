@@ -49,22 +49,34 @@ class Find_Store():
         time.sleep(3)
 
         # 더보기 클릭하여 댓글 30개 펼치기
-        if driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').is_enabled():
+        if driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').is_displayed():
             driver.find_element_by_xpath('//*[@id="review"]/li[12]/a').click()
+            print('if1')
             time.sleep(3)
+        elif driver.find_element_by_xpath('//*[@id="review"]/li[contains(@class,"list-group-item btn-more ng-hide")').is_displayed():
+            pass
         else:       # 댓글이 10개 미만인 경우 에러가 발생하지 않도록 pass
+            print('else1')
             pass
 
-        if driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').is_enabled():
+        if driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').is_displayed():
             driver.find_element_by_xpath('//*[@id="review"]/li[22]/a').click()
+            print('if2')
             time.sleep(3)
+        elif driver.find_element_by_xpath('//*[@id="review"]/li[contains(@class,"list-group-item btn-more ng-hide")').is_displayed():
+            pass
         else:
+            print('else2')
             pass
 
-        if driver.find_element_by_xpath('//*[@id="review"]/li[32]/a').is_enabled():
+        if driver.find_element_by_xpath('//*[@id="review"]/li[32]/a').is_displayed():
             driver.find_element_by_xpath('//*[@id="review"]/li[32]/a').click()
+            print('if3')
             time.sleep(3)
+        elif driver.find_element_by_xpath('//*[@id="review"]/li[contains(@class,"list-group-item btn-more ng-hide")').is_displayed():
+            pass
         else:
+            print('else3')
             pass
 
         print(type(count))
@@ -78,14 +90,14 @@ class Find_Store():
         if c > 33:
             for r in range(2, 33):
                 review_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/p').text)
-                star_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[2]/div').text)
                 menu_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[3]').text)
+                star_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[2]/div/span[1]/span[contains(@class, "full ng-scope")]').text)
         elif c == 0:
             pass
         else:
             for r in range(2, c+2):
                 review_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/p').text)
-                star_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[2]/div').text)
+                star_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[2]/div/span[1]/span[contains(@class, "full ng-scope")]').text)
                 menu_list.append(driver.find_element_by_xpath(f'//*[@id="review"]/li[{r}]/div[3]').text)
 
         print(review_list)
