@@ -81,6 +81,7 @@ class Find_Store2():
             print('6')
             pass
 
+        time.sleep(3)
         # selenium 작업으로 더보기 펼친 후 html 긁어오기
         html = driver.page_source
         print('html')
