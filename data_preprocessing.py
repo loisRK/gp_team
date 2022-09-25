@@ -6,6 +6,7 @@ from wordcloud import WordCloud
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib_font import font_setting
+from math import pi
 
 font_setting()
 class data_frame:
@@ -35,12 +36,19 @@ class data_frame:
         return plt.show()
 
     def star_pre(self, star):
+        print(1)
         df = pd.Series(star)
+        print(2)
         df = pd.DataFrame(df, columns=['star'])
+        print(3)
         data = df.star.str.split('\n')
-        df['taste'] = data.str.get(3).astype('float')
-        df['amount'] = data.str.get(6).astype('float')
-        df['delivery'] = data.str.get(9).astype('float')
+        print(4)
+        df['taste'] = data.str.get(3).astype('float64')
+        print(5)
+        df['amount'] = data.str.get(6).astype('float64')
+        print(6)
+        df['delivery'] = data.str.get(9).astype('float64')
+        print(7)
 
         var = ['맛', '양', '배달']
         var1 = [*var, var[0]]
@@ -51,10 +59,11 @@ class data_frame:
 
         ax = plt.subplot(polar=True)
         ax.set_theta_offset(pi / 2)  ## 시작점
+        ax.tick_params(axis='x', which='major', pad=15)
         plt.xticks(lobel_loc, labels=var1, color='gray', size=10)
-
         ax.plot(lobel_loc, var_data1, linestyle='solid', color='green')
         ax.fill(lobel_loc, var_data1, 'green', alpha=0.3)
+        return plt.show()
     def menu_pre(self, menu):
         print('menu')
         print(menu)

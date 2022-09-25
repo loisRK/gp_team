@@ -37,14 +37,17 @@ class auto_w(QMainWindow,form_class): #class name 변경
         self.Star_Total.setText(FS.Star_Total)  # GUI: 총 평점
 
         review, menu, star_t, star_opt = FS.print_review()
-
+        print(review)
+        print(menu)
+        print(star_t)
+        print(star_opt)
 
         review = data_frame()
-        review.review_pre(review)
-        review.menu_pre(menu)
+        # review.review_pre(review)
+        # review.menu_pre(menu)
         review.star_pre(star_t)
 
-        review.make_csv(review, menu, star_t, star_opt)
+        # review.make_csv(review, menu, star_t, star_opt)
 
 
 app = QApplication([])

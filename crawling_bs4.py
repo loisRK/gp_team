@@ -7,19 +7,21 @@ from bs4 import BeautifulSoup
 
 class Find_Store2():
 
+
     def __init__(self):
         super().__init__()
         self.Comment_Total = None
         self.Store_Name = None
         self.Star_Total = None
-        self.review_list = None     # 데이터 전처리용 변수
-        self.star_list = None       # 데이터 전처리용 변수
-        self.menu_list = None       # 데이터 전처리용 변수
-        self.star_opt = None        # 데이터 전처리용 변수
+
         self.Positive_Review = None     # 모델학습결과 넣을 변수
         self.Negative_Review = None     # 모델학습결과 넣을 변수
 
     def play(self, sname):
+        global review_list
+        global star_list
+        global menu_list
+        global star_opt
 
         # 크롤링 작업
         Store_link = "https://www.yogiyo.co.kr/mobile/#/"
@@ -115,4 +117,4 @@ class Find_Store2():
         print(star_opt)
 
     def print_review(self):
-        return self.review_list, self.menu_list, self.star_list, self.star_opt
+        return review_list, menu_list, star_list, star_opt
