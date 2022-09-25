@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
-# from konlpy.tag import Okt
+from konlpy.tag import Okt
 from collections import Counter
 import matplotlib
 import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 
 
 class data_frame:
@@ -20,9 +21,19 @@ class data_frame:
         return store_df
 
     def review_pre(self, review):
-        print('menu')
-        print(menu)
-    #
+        engine = Okt()
+        all_nouns = engine.nouns(' '.join(review))
+        nouns = [n for n in all_nouns if len(n) > 1]
+        count = Counter(nouns)
+        tags = count.most_common(100)
+        wc = WordCloud(font_path='malgun', background_color='white', colormap='magma', width=2500,
+                       height=1500)
+        cloud = wc.generate_from_frequencies(dict(tags))
+        plt.imshow(cloud, interpolation='bilinear')
+        plt.axis('off')
+
+        return plt.show()
+
     # def star_pre(self, star):
     #     df = pd.Series(star)
     #     df = pd.DataFrame(df, columns=['star'])
