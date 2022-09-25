@@ -2,7 +2,6 @@ import matplotlib.font_manager
 import matplotlib.pyplot as plt
 import platform
 
-
 def font_setting() :
     if platform.system() == 'Darwin': #맥
             plt.rc('font', family='AppleGothic')
@@ -19,7 +18,7 @@ def font_setting() :
 
 
 
-#### 한글깨짐 확인용 코드
+##### 한글깨짐 확인용 코드
 # ratio = [18, 6, 4, 4, 6]
 # labels = ['순살양념（보통맛）', '순살양념（순한맛）', '공기밥 추가', '뼈 양념치킨（보통맛）', '기타']
 # plt.pie(ratio, labels=labels, autopct='%.1f%%')

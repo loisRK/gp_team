@@ -4,17 +4,19 @@ import re
 from tqdm import tqdm
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
-
 import warnings
 warnings.filterwarnings("ignore")
 
 pd.set_option('display.max_columns', None)
 
+# sentiment_model.h5, embedding.csv 링크로 다운 받아서 경로 설정하기
+working_directory = '.'
+
 class Sentiment:
     def __init__(self):
         # 모델 로딩
-        self.model = SentenceTransformer('./data/sentiment_model.h5')
-        self.embedding_df = pd.read_csv('./data/embedding.csv', index_col=0)
+        self.model = SentenceTransformer(f'{working_directory}/sentiment_model.h5')
+        self.embedding_df = pd.read_csv(f'{working_directory}/embedding.csv', index_col=0)
         self.embedding_df.embedding = self.embedding_df.embedding.apply(lambda x: [float(i) for i in x[1:-1].split(', ')])
 
     def predict_score(self, sample_text):

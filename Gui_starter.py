@@ -4,7 +4,8 @@ from PyQt5.QtWidgets import *
 from Page_Gui_Test import Ui_MainWindow #앞의 파일명 동일 kinwriter_python 만 변경
 from Crawling_Store import Find_Store
 from data_preprocessing import data_frame
-
+from sentiment_model import Sentiment
+import pandas as pd
 
 class auto_w(QMainWindow,Ui_MainWindow): #class name 변경
     def __init__(self):
@@ -26,7 +27,14 @@ class auto_w(QMainWindow,Ui_MainWindow): #class name 변경
         review.menu_pre(review_m)
         review.make_csv(review_l, review_s, review_m)
 
-
+        # 모델 실행
+        model = Sentiment()
+        review_sample = pd.DataFrame(review_l, columns=['review'])
+        print("Model predicting...")
+        output = model.get_score(review_sample)
+        print("********** 모델 결과 ***********")
+        print(output)
+        print("*******************************")
 
 app = QApplication([])
 main_dialog = auto_w() #해당부분 위 class name과 동일하게 작성
