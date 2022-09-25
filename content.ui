@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>828</width>
-    <height>831</height>
+    <width>836</width>
+    <height>838</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,7 +106,7 @@ background-color: rgb(89, 255, 0);</string>
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>10</y>
+     <y>20</y>
      <width>391</width>
      <height>41</height>
     </rect>
@@ -179,7 +179,7 @@ color: black;</string>
     <rect>
      <x>0</x>
      <y>330</y>
-     <width>831</width>
+     <width>841</width>
      <height>471</height>
     </rect>
    </property>
@@ -203,7 +203,7 @@ font: 75 9pt &quot;나눔고딕 ExtraBold&quot;;
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
-       <x>290</x>
+       <x>300</x>
        <y>10</y>
        <width>231</width>
        <height>31</height>
@@ -227,7 +227,7 @@ background-color: rgb(253, 237, 255);</string>
     <widget class="QGraphicsView" name="graphicsView_8">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>30</x>
        <y>50</y>
        <width>381</width>
        <height>381</height>
@@ -241,7 +241,7 @@ background-color: rgb(233, 245, 255);</string>
     <widget class="QGraphicsView" name="graphicsView_9">
      <property name="geometry">
       <rect>
-       <x>420</x>
+       <x>430</x>
        <y>50</y>
        <width>381</width>
        <height>381</height>
@@ -260,7 +260,7 @@ background-color: rgb(233, 245, 255);</string>
     <widget class="QGraphicsView" name="graphicsView_4">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>30</x>
        <y>50</y>
        <width>381</width>
        <height>381</height>
@@ -274,7 +274,7 @@ background-color: rgb(233, 245, 255);</string>
     <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>150</x>
        <y>10</y>
        <width>141</width>
        <height>31</height>
@@ -301,7 +301,7 @@ background-color: rgb(253, 237, 255);</string>
     <widget class="QGraphicsView" name="graphicsView_5">
      <property name="geometry">
       <rect>
-       <x>420</x>
+       <x>430</x>
        <y>50</y>
        <width>381</width>
        <height>381</height>
@@ -315,7 +315,7 @@ background-color: rgb(233, 245, 255);</string>
     <widget class="QLabel" name="label_13">
      <property name="geometry">
       <rect>
-       <x>540</x>
+       <x>550</x>
        <y>10</y>
        <width>141</width>
        <height>31</height>
@@ -347,7 +347,7 @@ background-color: rgb(253, 237, 255);</string>
     <widget class="QLabel" name="label_16">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>150</x>
        <y>10</y>
        <width>141</width>
        <height>31</height>
@@ -374,7 +374,7 @@ background-color: rgb(253, 237, 255);</string>
     <widget class="QLabel" name="label_17">
      <property name="geometry">
       <rect>
-       <x>540</x>
+       <x>550</x>
        <y>10</y>
        <width>141</width>
        <height>31</height>
@@ -401,7 +401,7 @@ background-color: rgb(253, 237, 255);</string>
     <widget class="QGraphicsView" name="graphicsView_6">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>30</x>
        <y>50</y>
        <width>381</width>
        <height>381</height>
@@ -415,7 +415,7 @@ background-color: rgb(233, 245, 255);</string>
     <widget class="QGraphicsView" name="graphicsView_7">
      <property name="geometry">
       <rect>
-       <x>420</x>
+       <x>430</x>
        <y>50</y>
        <width>381</width>
        <height>381</height>
@@ -658,7 +658,7 @@ color: white;
     <rect>
      <x>420</x>
      <y>80</y>
-     <width>391</width>
+     <width>401</width>
      <height>31</height>
     </rect>
    </property>
@@ -700,6 +700,27 @@ color: white;
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>20</y>
+     <width>51</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+font: 10pt &quot;Consolas&quot;;
+font: 75 9pt &quot;나눔고딕 ExtraBold&quot;;
+color: white;
+	background-color: rgb(255, 0, 0);
+	border-radius: 15px;</string>
+   </property>
+   <property name="text">
+    <string>종료</string>
    </property>
   </widget>
  </widget>
