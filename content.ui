@@ -702,27 +702,6 @@ color: white;
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>770</x>
-     <y>20</y>
-     <width>51</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">
-font: 10pt &quot;Consolas&quot;;
-font: 75 9pt &quot;나눔고딕 ExtraBold&quot;;
-color: white;
-	background-color: rgb(255, 0, 0);
-	border-radius: 15px;</string>
-   </property>
-   <property name="text">
-    <string>종료</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>
