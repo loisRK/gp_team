@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 from konlpy.tag import Okt
 from collections import Counter
 from wordcloud import WordCloud
+from math import pi
 
 font_setting()
 
@@ -42,8 +43,30 @@ class data_frame:
 
         return plt.show()
 
-    def star_pre(self, star):
-        print('star')
+    def star_pre(self, star_opt):
+        print(star_opt)
+        df = pd.Series(star_opt)
+        df = pd.DataFrame(df, columns=['star'])
+        data = df.star.str.split('\n')
+        df['taste'] = data.str.get(3).astype('float')
+        df['amount'] = data.str.get(6).astype('float')
+        df['delivery'] = data.str.get(9).astype('float')
+
+        var = ['맛', '양', '배달']
+        var1 = [*var, var[0]]
+        var_data = [df['taste'].mean(), df['amount'].mean(), df['delivery'].mean()]
+        var_data1 = [*var_data, var_data[0]]
+
+        lobel_loc = np.linspace(start=0, stop=2 * np.pi, num=len(var_data1))
+        ax = plt.subplot(polar=True)
+        ax.set_theta_offset(pi / 2)  ## 시작점
+        # ax.set_theta_direction(1)
+        ax.tick_params(axis='x', which='major', pad=15)
+        plt.xticks(lobel_loc, labels=var1, color='gray', size=10)
+
+        ax.plot(lobel_loc, var_data1, linestyle='solid', color='green')
+        ax.fill(lobel_loc, var_data1, 'green', alpha=0.3)
+        return plt.show()
 
     def menu_pre(self, menu):
         print('menu')

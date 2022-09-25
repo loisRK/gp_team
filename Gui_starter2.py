@@ -70,20 +70,20 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         print('star_t:',star_t)
         print('star_opt:',star_opt)
         rv = data_frame()
-        rv.review_pre(review)
+        # rv.review_pre(review)
         # rv.menu_pre(menu)
-        # rv.star_pre(star_t)
+        rv.star_pre(star_opt)
         #
         # rv.make_csv(review, menu, star_t, star_opt)
 
         # 모델 실행
-        model = Sentiment()
-        review_sample = pd.DataFrame(review, columns=['review'])
-        print("Model predicting...")
-        output = model.get_score(review_sample)
-        print("********** 모델 결과 ***********")
-        print(output)
-        print("*******************************")
+        # model = Sentiment()
+        # review_sample = pd.DataFrame(review, columns=['review'])
+        # print("Model predicting...")
+        # output = model.get_score(review_sample)
+        # print("********** 모델 결과 ***********")
+        # print(output)
+        # print("*******************************")
 
 
 if __name__ == "__main__":
