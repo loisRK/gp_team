@@ -6,6 +6,10 @@ import os
 import sys
 from data_preprocessing import data_frame
 
+from sentiment_model import Sentiment
+import pandas as pd
+
+
 # 파일 불러오는 함수 생성
 def resource_path(relative_path):
     base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
@@ -71,6 +75,15 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         # rv.star_pre(star_t)
         #
         # rv.make_csv(review, menu, star_t, star_opt)
+
+        # 모델 실행
+        model = Sentiment()
+        review_sample = pd.DataFrame(review, columns=['review'])
+        print("Model predicting...")
+        output = model.get_score(review_sample)
+        print("********** 모델 결과 ***********")
+        print(output)
+        print("*******************************")
 
 
 if __name__ == "__main__":
