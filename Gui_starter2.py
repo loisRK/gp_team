@@ -5,7 +5,6 @@ from crawling_bs4 import Find_Store2
 import os
 import sys
 from data_preprocessing import data_frame
-from Page_Gui_Test import Ui_MainWindow #앞의 파일명 동일 kinwriter_python 만 변경
 
 # 파일 불러오는 함수 생성
 def resource_path(relative_path):
@@ -33,7 +32,6 @@ class Main_Window(QMainWindow, form_class1):
     def get_store(self):
         global store_name
         store_name = self.Input_Store.text()
-        return store_name
 
     def display(self):
         self.hide()  # 메인 윈도우 숨김
@@ -67,12 +65,12 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         print('menu:',menu)
         print('star_t:',star_t)
         print('star_opt:',star_opt)
-        rv = data_frame()
-        rv.review_pre(review)
-        rv.menu_pre(menu)
-        rv.star_pre(star_t)
-
-        rv.make_csv(review, menu, star_t, star_opt)
+        # rv = data_frame()
+        # rv.review_pre(review)
+        # rv.menu_pre(menu)
+        # rv.star_pre(star_t)
+        #
+        # rv.make_csv(review, menu, star_t, star_opt)
 
 
 if __name__ == "__main__":
