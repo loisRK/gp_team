@@ -3,6 +3,8 @@ from selenium import webdriver
 import time
 # (BeautifulSoup)
 from bs4 import BeautifulSoup
+from PyQt5.QtGui import *
+
 
 
 class Find_Store2():
@@ -20,8 +22,8 @@ class Find_Store2():
         global star_list
         global menu_list
         global star_opt
-        global Star_Total
-        global Comment_Total
+        # global Star_Total
+        # global Comment_Total
 
         # 크롤링 작업
         Store_link = "https://www.yogiyo.co.kr/mobile/#/"
@@ -136,6 +138,8 @@ class Find_Store2():
         for s in review_tag.select('div.star-point > span.category'):
             star_opt.append(s.get_text())
         print(star_opt)
+
+
 
 
     def print_review(self):

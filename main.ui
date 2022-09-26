@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>801</width>
-    <height>527</height>
+    <width>791</width>
+    <height>488</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -20,14 +20,14 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <string notr="true">background-color:rgb(199, 199, 199);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="Find_Store_Btn">
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>260</y>
+      <y>250</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -45,146 +45,26 @@
      <string notr="true">
 font: 10pt &quot;Consolas&quot;;
 font: 75 9pt &quot;나눔고딕 ExtraBold&quot;;
-color: white;
-	background-color: rgb(58, 134, 255);
+color:black;
+	background-color:  rgb(134, 199, 99);
 	border-radius: 15px;</string>
     </property>
     <property name="text">
      <string>search</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>150</y>
-      <width>41</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-font: 10pt &quot;Consolas&quot;;
-font: 75 20pt &quot;나눔고딕 ExtraBold&quot;;
-color: rgb(0, 85, 255);
-	background-color: rgb(255,255,255);
-	border-radius: 15px;</string>
-    </property>
-    <property name="text">
-     <string>P</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>150</y>
-      <width>41</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-font: 10pt &quot;Consolas&quot;;
-font: 75 20pt &quot;나눔고딕 ExtraBold&quot;;
-color: red;
-	background-color: rgb(255,255,255);
-	border-radius: 15px;</string>
-    </property>
-    <property name="text">
-     <string>y</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>150</y>
-      <width>41</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-font: 10pt &quot;Consolas&quot;;
-font: 75 20pt &quot;나눔고딕 ExtraBold&quot;;
-color: red;
-	background-color: rgb(255,255,255);
-	border-radius: 15px;</string>
-    </property>
-    <property name="text">
-     <string>e</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>150</y>
-      <width>41</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-font: 10pt &quot;Consolas&quot;;
-font: 75 20pt &quot;나눔고딕 ExtraBold&quot;;
-color: rgb(255, 255, 0);
-	background-color: rgb(255,255,255);
-	border-radius: 15px;</string>
-    </property>
-    <property name="text">
-     <string>e</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>150</y>
-      <width>41</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-font: 10pt &quot;Consolas&quot;;
-font: 75 20pt &quot;나눔고딕 ExtraBold&quot;;
-color: rgb(0, 170, 0);
-	background-color: rgb(255,255,255);
-	border-radius: 15px;</string>
-    </property>
-    <property name="text">
-     <string>e</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="Input_Store">
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>260</y>
+      <y>250</y>
       <width>291</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 15px;
-background-color: rgb(233, 245, 255);
+background-color: rgb(255, 255, 127);
 font: 10pt &quot;Consolas&quot;;
 font: 75 9pt &quot;나눔고딕 ExtraBold&quot;;
 color: black;</string>
@@ -196,12 +76,12 @@ color: black;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>150</y>
-      <width>41</width>
+      <x>260</x>
+      <y>130</y>
+      <width>121</width>
       <height>51</height>
      </rect>
     </property>
@@ -209,12 +89,36 @@ color: black;</string>
      <string notr="true">
 font: 10pt &quot;Consolas&quot;;
 font: 75 20pt &quot;나눔고딕 ExtraBold&quot;;
-color: rgb(0, 85, 255);
-	background-color: rgb(255,255,255);
+color: rgb(255, 255, 127);
+	background-color: rgb(199,199,199);
 	border-radius: 15px;</string>
     </property>
     <property name="text">
-     <string>G</string>
+     <string>G r a y</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>130</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+font: 10pt &quot;Consolas&quot;;
+font: 75 20pt &quot;나눔고딕 ExtraBold&quot;;
+color: rgb(121, 121, 121);
+	background-color: rgb(199,199,199);
+	border-radius: 15px;</string>
+    </property>
+    <property name="text">
+     <string>C o r n 🌽</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -226,7 +130,7 @@ color: rgb(0, 85, 255);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>801</width>
+     <width>791</width>
      <height>26</height>
     </rect>
    </property>
