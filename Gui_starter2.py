@@ -74,7 +74,9 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         # print('star_t:', star_t)
         # print('star_opt:', star_opt)
         rv = data_frame()
-        # # rv.review_pre(review)
+
+        # rv.review_pre(review)
+
         # rv.menu_pre(menu)
         # print(type(rv.menu_pre(menu)))
         # self.graphicsView_4.show(rv.menu_pre(menu))
@@ -90,6 +92,10 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         print("********** 모델 결과 ***********")
         print(output)
         print("*******************************")
+
+        # 리뷰/평점 일치율 파이차트 추가
+        rv.math_pie(star_t, output)
+
 
 
         rv.star_compare(star_t, output)
