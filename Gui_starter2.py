@@ -70,21 +70,28 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         print('star_t:',star_t)
         print('star_opt:',star_opt)
         rv = data_frame()
-        # rv.review_pre(review)
+
         # rv.menu_pre(menu)
-        rv.star_pre(star_opt)
+        # rv.star_pre(star_opt)
         #
         # rv.make_csv(review, menu, star_t, star_opt)
 
         # 모델 실행
-        # model = Sentiment()
-        # review_sample = pd.DataFrame(review, columns=['review'])
-        # print("Model predicting...")
-        # output = model.get_score(review_sample)
-        # print("********** 모델 결과 ***********")
-        # print(output)
-        # print("*******************************")
+        model = Sentiment()
+        review_sample = pd.DataFrame(review, columns=['review'])
+        print("Model predicting...")
+        output = model.get_score(review_sample)
+        print("********** 모델 결과 ***********")
+        print(output)
+        print("*******************************")
 
+        review_sample['predict_star_t'] = output
+
+        postive_review=review_sample[review_sample['predict_star_t'] >=4.0]
+        negative_review = review_sample[review_sample['predict_star_t'] < 4.0]
+
+        # rv.postive_review_pre(list(postive_review['review']))
+        rv.negative_review_pre(list(negative_review['review']))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

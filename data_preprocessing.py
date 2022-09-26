@@ -13,6 +13,7 @@ from konlpy.tag import Okt
 from collections import Counter
 from wordcloud import WordCloud
 from math import pi
+from PIL import Image
 
 font_setting()
 
@@ -29,13 +30,30 @@ class data_frame:
         store_df.to_csv('C:/Users/Playdata/project/data.csv')
         return store_df
 
-    def review_pre(self, review):
+    def postive_review_pre(self, review):
         engine = Okt()
         all_nouns = engine.nouns(' '.join(review))
         nouns = [n for n in all_nouns if len(n) > 1]
+        img = Image.open('./thumbs_up.JPG')
+        mask = np.array(img)
         count = Counter(nouns)
         tags = count.most_common(100)
-        wc = WordCloud(font_path='malgun', background_color='white', colormap='magma', width=2500,
+        wc = WordCloud(font_path='malgun', mask=mask, background_color='white', colormap='YlGnBu', width=2500,
+                       height=1500)
+        cloud = wc.generate_from_frequencies(dict(tags))
+        plt.imshow(cloud, interpolation='bilinear')
+        plt.axis('off')
+
+        return plt.show()
+    def negative_review_pre(self, review):
+        engine = Okt()
+        all_nouns = engine.nouns(' '.join(review))
+        nouns = [n for n in all_nouns if len(n) > 1]
+        img = Image.open('./thumbs_down.JPG')
+        mask = np.array(img)
+        count = Counter(nouns)
+        tags = count.most_common(100)
+        wc = WordCloud(font_path='malgun', mask=mask, background_color='white', colormap='YlGnBu', width=2500,
                        height=1500)
         cloud = wc.generate_from_frequencies(dict(tags))
         plt.imshow(cloud, interpolation='bilinear')
@@ -44,7 +62,6 @@ class data_frame:
         return plt.show()
 
     def star_pre(self, star_opt):
-        print(star_opt)
         df = pd.Series(star_opt)
         df = pd.DataFrame(df, columns=['star'])
         data = df.star.str.split('\n')
