@@ -62,8 +62,7 @@ class data_frame:
         ax.set_theta_offset(pi / 2)  ## 시작점
         # ax.set_theta_direction(1)
         ax.tick_params(axis='x', which='major', pad=15)
-        plt.xticks(lobel_loc, labels=var1, color='gray', size=10)
-
+        plt.xticks(lobel_loc, labels=var1, color='gray', size=10,fontsize=20)
         ax.plot(lobel_loc, var_data1, linestyle='solid', color='green')
         ax.fill(lobel_loc, var_data1, 'green', alpha=0.3)
         return plt.show()
