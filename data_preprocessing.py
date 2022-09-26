@@ -1,11 +1,4 @@
 import pandas as pd
-import numpy as np
-from konlpy.tag import Okt
-from collections import Counter
-from wordcloud import WordCloud
-import matplotlib
-import matplotlib.pyplot as plt
-from wordcloud import WordCloud
 from matplotlib_font import font_setting
 import re
 import matplotlib.pyplot as plt
@@ -16,6 +9,7 @@ import math
 
 font_setting()
 
+
 class data_frame:
     def __init__(self):
         self.review = []
@@ -24,10 +18,38 @@ class data_frame:
 
     def make_csv(self, review, menu, star_t, star_opt):
         global store_df
-        data = {'review' : review, 'menu' : menu, 'star_total' : star_t, 'star_option' : star_opt}
+        data = {'review': review, 'menu': menu, 'star_total': star_t, 'star_option': star_opt}
         store_df = pd.DataFrame(data)
         store_df.to_csv('C:/Users/Playdata/project/data.csv')
         return store_df
+
+    def star_compare(self, stars, pred_review):
+        stars = list(map(len, stars))
+        # pred_review = list(map(round, pred_review))
+
+        x = range(len(stars))
+        plt.plot(x, stars, label='요기요')
+        plt.plot(x, pred_review, label='모델')
+
+        plt.xlabel('리뷰')
+        plt.ylabel('평점')
+
+        plt.fill_between(x=x, y1=stars, y2=0, alpha=0.2)
+        plt.fill_between(x=x, y1=pred_review, y2=0, alpha=0.2)
+
+        plt.ylim(0,6)
+        plt.legend(loc="lower right")
+        plt.show()
+
+    def pos_neg_pie(self, pred_review):
+        pos_neg = ['pos' if rev >= 3.5 else 'neg' for rev in pred_review]
+        ratio = [pos_neg.count('pos') / len(pos_neg), pos_neg.count('neg') / len(pos_neg)]
+        labels = ['긍정', '부정']
+        colors = ['#6b7ff0', '#f06b7f']
+        explode = [0.05 for i in range(len(labels))]
+
+        plt.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
+        plt.show()
 
     def review_pre(self, review):
         engine = Okt()
@@ -69,7 +91,8 @@ class data_frame:
                     count_list.append(int(num[0]))
 
         menu_df = pd.DataFrame({'menu': menu_list, 'count': count_list}, index=None)
-        menu_sorted = pd.DataFrame(data=menu_df.groupby('menu').sum().sort_values(by='count', ascending=False),index=None)
+        menu_sorted = pd.DataFrame(data=menu_df.groupby('menu').sum().sort_values(by='count', ascending=False),
+                                   index=None)
         menu_sorted['rank'] = menu_sorted['count'].rank(method='min', ascending=False)
         menu_sorted.reset_index(inplace=True)
 
@@ -83,7 +106,9 @@ class data_frame:
 
         colors = ['#f7ecb0', '#ffb3e6', '#99ff99', '#66b3ff', '#c7b3fb', '#ff6666', '#f9c3b7']
         plt.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
+        print(type(plt.show()))
         return plt.show()
+
 
     def math_pie(self, star_t, pred):
         star = [len(s) for s in star_t]  # 별 개수 세서 리스트로 저장
@@ -99,3 +124,4 @@ class data_frame:
         colors = ['#f7ecb0', '#ffb3e6', '#99ff99', '#66b3ff', '#c7b3fb', '#ff6666', '#f9c3b7']
         plt.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
         return plt.show()
+

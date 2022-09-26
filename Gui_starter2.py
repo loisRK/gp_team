@@ -1,13 +1,17 @@
+# 데이터 전처리 모듈 별도 실행 버전
 # main 실행 파일
+import os
+import sys
+
+import matplotlib.pyplot as plt
+import pandas as pd
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
 from crawling_bs4 import Find_Store2
-import os
-import sys
 from data_preprocessing import data_frame
-
 from sentiment_model import Sentiment
-import pandas as pd
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
 
 
 # 파일 불러오는 함수 생성
@@ -19,7 +23,7 @@ def resource_path(relative_path):
 #################main.ui 가져오기#######################
 form = resource_path('main.ui')
 form_class1 = uic.loadUiType(form)[0]
-#################Page_Gui_Test.ui 가져오기##############
+#################content.ui 가져오기##############
 form2 = resource_path('content.ui')
 form_class2 = uic.loadUiType(form2)[0]
 
@@ -41,7 +45,7 @@ class Main_Window(QMainWindow, form_class1):
         self.hide()  # 메인 윈도우 숨김
         self.second = Second_Window(store_name)
         self.second.exec()  # 두 번째 창 닫을 때 까지 기다림
-        self.show()
+        self.show()     # 두 번째 창이 닫히면 다시 메인 창이 열림
 
 
 class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
@@ -55,28 +59,32 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
     def start_GP(self, sname):
         FS = Find_Store2()
         FS.play(sname)
-
-        # GUI : 빈칸 채우기 반환값
-        self.Store_Name.setText(sname)  # GUI: 가게이름
-        print('fs.storename:',sname)
-        self.Review_Count_total.setText(FS.Comment_Total)  # GUI: Total Comment
-        print('fs.comment_total', FS.Comment_Total)
-        self.Star_Total.setText(FS.Star_Total)  # GUI: 총 평점
-        print('fs.star_total', FS.Star_Total)
-
+        #
+        # # GUI : 빈칸 채우기 반환값
+        # self.Store_Name.setText(sname)  # GUI: 가게이름
+        # print('fs.storename:',sname)
+        # self.Review_Count_total.setText(FS.Comment_Total)  # GUI: Total Comment
+        # print('fs.comment_total', FS.Comment_Total)
+        # self.Star_Total.setText(FS.Star_Total)  # GUI: 총 평점
+        # print('fs.star_total', FS.Star_Total)
+        #
         review, menu, star_t, star_opt = FS.print_review()
-        print('review:',review)
-        print('menu:',menu)
-        print('star_t:',star_t)
-        print('star_opt:',star_opt)
+        # print('review:', review)
+        # print('menu:', menu)
+        # print('star_t:', star_t)
+        # print('star_opt:', star_opt)
         rv = data_frame()
+
         # rv.review_pre(review)
+
         # rv.menu_pre(menu)
+        # print(type(rv.menu_pre(menu)))
+        # self.graphicsView_4.show(rv.menu_pre(menu))
         # rv.star_pre(star_t)
         #
         # rv.make_csv(review, menu, star_t, star_opt)
 
-        # 모델 실행
+        # # 모델 실행
         model = Sentiment()
         review_sample = pd.DataFrame(review, columns=['review'])
         print("Model predicting...")
@@ -89,6 +97,9 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         rv.math_pie(star_t, output)
 
 
+
+        rv.star_compare(star_t, output)
+        rv.pos_neg_pie(output)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
