@@ -1,11 +1,4 @@
 import pandas as pd
-import numpy as np
-from konlpy.tag import Okt
-from collections import Counter
-from wordcloud import WordCloud
-import matplotlib
-import matplotlib.pyplot as plt
-from wordcloud import WordCloud
 from matplotlib_font import font_setting
 import re
 import matplotlib.pyplot as plt
@@ -15,6 +8,7 @@ from wordcloud import WordCloud
 
 font_setting()
 
+
 class data_frame:
     def __init__(self):
         self.review = []
@@ -23,7 +17,7 @@ class data_frame:
 
     def make_csv(self, review, menu, star_t, star_opt):
         global store_df
-        data = {'review' : review, 'menu' : menu, 'star_total' : star_t, 'star_option' : star_opt}
+        data = {'review': review, 'menu': menu, 'star_total': star_t, 'star_option': star_opt}
         store_df = pd.DataFrame(data)
         store_df.to_csv('C:/Users/Playdata/project/data.csv')
         return store_df
@@ -68,7 +62,8 @@ class data_frame:
                     count_list.append(int(num[0]))
 
         menu_df = pd.DataFrame({'menu': menu_list, 'count': count_list}, index=None)
-        menu_sorted = pd.DataFrame(data=menu_df.groupby('menu').sum().sort_values(by='count', ascending=False),index=None)
+        menu_sorted = pd.DataFrame(data=menu_df.groupby('menu').sum().sort_values(by='count', ascending=False),
+                                   index=None)
         menu_sorted['rank'] = menu_sorted['count'].rank(method='min', ascending=False)
         menu_sorted.reset_index(inplace=True)
 
@@ -82,6 +77,5 @@ class data_frame:
 
         colors = ['#f7ecb0', '#ffb3e6', '#99ff99', '#66b3ff', '#c7b3fb', '#ff6666', '#f9c3b7']
         plt.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
+        print(type(plt.show()))
         return plt.show()
-
-
