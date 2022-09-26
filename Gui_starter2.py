@@ -68,12 +68,12 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         # self.Star_Total.setText(FS.Star_Total)  # GUI: 총 평점
         # print('fs.star_total', FS.Star_Total)
         #
-        # review, menu, star_t, star_opt = FS.print_review()
+        review, menu, star_t, star_opt = FS.print_review()
         # print('review:', review)
         # print('menu:', menu)
         # print('star_t:', star_t)
         # print('star_opt:', star_opt)
-        # rv = data_frame()
+        rv = data_frame()
         # # rv.review_pre(review)
         # rv.menu_pre(menu)
         # print(type(rv.menu_pre(menu)))
@@ -83,15 +83,17 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         # rv.make_csv(review, menu, star_t, star_opt)
 
         # # 모델 실행
-        # model = Sentiment()
-        # review_sample = pd.DataFrame(review, columns=['review'])
-        # print("Model predicting...")
-        # output = model.get_score(review_sample)
-        # print("********** 모델 결과 ***********")
-        # print(output)
-        # print("*******************************")
+        model = Sentiment()
+        review_sample = pd.DataFrame(review, columns=['review'])
+        print("Model predicting...")
+        output = model.get_score(review_sample)
+        print("********** 모델 결과 ***********")
+        print(output)
+        print("*******************************")
 
 
+        rv.star_compare(star_t, output)
+        rv.pos_neg_pie(output)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

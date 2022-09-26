@@ -22,6 +22,34 @@ class data_frame:
         store_df.to_csv('C:/Users/Playdata/project/data.csv')
         return store_df
 
+    def star_compare(self, stars, pred_review):
+        stars = list(map(len, stars))
+        # pred_review = list(map(round, pred_review))
+
+        x = range(len(stars))
+        plt.plot(x, stars, label='요기요')
+        plt.plot(x, pred_review, label='모델')
+
+        plt.xlabel('리뷰')
+        plt.ylabel('평점')
+
+        plt.fill_between(x=x, y1=stars, y2=0, alpha=0.2)
+        plt.fill_between(x=x, y1=pred_review, y2=0, alpha=0.2)
+
+        plt.ylim(0,6)
+        plt.legend(loc="lower right")
+        plt.show()
+
+    def pos_neg_pie(self, pred_review):
+        pos_neg = ['pos' if rev >= 3.5 else 'neg' for rev in pred_review]
+        ratio = [pos_neg.count('pos') / len(pos_neg), pos_neg.count('neg') / len(pos_neg)]
+        labels = ['긍정', '부정']
+        colors = ['#6b7ff0', '#f06b7f']
+        explode = [0.05 for i in range(len(labels))]
+
+        plt.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
+        plt.show()
+
     def review_pre(self, review):
         engine = Okt()
         all_nouns = engine.nouns(' '.join(review))
