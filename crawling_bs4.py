@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 from PyQt5.QtGui import *
 
 
-
 class Find_Store2():
     global Star_Total
     global Comment_Total

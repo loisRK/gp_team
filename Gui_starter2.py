@@ -74,7 +74,9 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         # print('star_t:', star_t)
         # print('star_opt:', star_opt)
         rv = data_frame()
-        # # rv.review_pre(review)
+
+        # rv.review_pre(review)
+
         # rv.menu_pre(menu)
         # print(type(rv.menu_pre(menu)))
         # self.graphicsView_4.show(rv.menu_pre(menu))
@@ -91,7 +93,18 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         print(output)
         print("*******************************")
 
+        # # 긍정/부정 워드클라우드
+        review_sample['predict_star_t'] = output  # output list 결과를 다시 df 형식으로 변환
+        # 긍정 = 4.0 이상, 부정 = 4.0 미만인 리뷰 분리
+        postive_review = review_sample[review_sample['predict_star_t'] >= 4.0]
+        # negative_review = review_sample[review_sample['predict_star_t'] < 4.0]
+        # 긍정/부정 워드클라우드 함수 실행
+        self.postive_review_pre(list(postive_review['review']))
+        # self.negative_review_pre(list(negative_review['review']))
 
+
+        # 리뷰/평점 일치율 파이차트 추가
+        rv.math_pie(star_t, output)
         rv.star_compare(star_t, output)
         rv.pos_neg_pie(output)
 

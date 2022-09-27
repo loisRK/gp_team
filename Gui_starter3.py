@@ -1,8 +1,12 @@
 # 데이터 전처리 코드 메인 통합 버전
 # main 실행 파일
+import math
 import os
 import sys
+
+from PIL import Image
 from PyQt5 import uic
+from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import *
 
 # 데이터 전처리, 모델 학습 관련
@@ -86,13 +90,10 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         print('star_t:', star_t)
         print('star_opt:', star_opt)
 
-        self.review_pre(review)
-        self.menu_pre(menu)
-        # self.star_pre(star_opt)
-
-        # 모델 실행
+        # # 모델 실행
         model = Sentiment()
         review_sample = pd.DataFrame(review, columns=['review'])
+        print(review_sample.head())
         print("Model predicting...")
         output = model.get_score(review_sample)
         print("********** 모델 결과 ***********")
@@ -105,15 +106,31 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         print(type(avg))
         self.Star_Total_2.setText(str(avg))
 
+        # self.review_pre(review)   # 통합 리뷰 워드 클라우드
+        self.menu_pre(menu)
+        self.star_pre(star_opt)
+        self.match_pie(star_t, output)
+        self.star_compare(star_t, output)
+        self.pos_neg_pie(output)
+
+        # # 긍정/부정 워드클라우드
+        review_sample['predict_star_t'] = output    # output list 결과를 다시 df 형식으로 변환
+        # 긍정 = 4.0 이상, 부정 = 4.0 미만인 리뷰 분리
+        postive_review = review_sample[review_sample['predict_star_t'] >= 4.0]
+        negative_review = review_sample[review_sample['predict_star_t'] < 4.0]
+        # 긍정/부정 워드클라우드 함수 실행
+        self.postive_review_pre(list(postive_review['review']))
+        self.negative_review_pre(list(negative_review['review']))
+
     ### 데이터 전처리 및 시각화 함수 모음 ###
-    # 워드클라우드 시각화
+    # 워드클라우드 시각화(통합)
     def review_pre(self, review):
         engine = Okt()
         all_nouns = engine.nouns(' '.join(review))
         nouns = [n for n in all_nouns if len(n) > 1]
         count = Counter(nouns)
         tags = count.most_common(100)
-        wc = WordCloud(font_path='malgun', background_color='rgb(255, 255, 127)', colormap='magma', width=2500,
+        wc = WordCloud(font_path='malgun', background_color='white', colormap='magma', width=2500,
                        height=1500)
         cloud = wc.generate_from_frequencies(dict(tags))
 
@@ -140,19 +157,17 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         var_data = [df['taste'].mean(), df['amount'].mean(), df['delivery'].mean()]
         var_data1 = [*var_data, var_data[0]]
 
-        # ui에 matplot 띄우기
         lobel_loc = np.linspace(start=0, stop=2 * np.pi, num=len(var_data1))
-        canvas = FigureCanvas(Figure(figsize=(4, 3)))
-        canvas.xticks(lobel_loc, labels=var1, color='gray', size=10, fontsize=20)
-        vbox = QVBoxLayout(self.graphicsView_7)
-        vbox.addWidget(canvas)
-
-        self.ax = canvas.figure.subplots(polar=True)
-        self.ax.set_theta_offset(pi / 2)  ## 시작점
-        self.ax.tick_params(axis='x', which='major', pad=15)
-        self.ax.plot(lobel_loc, var_data1, linestyle='solid', color='green')
-        self.ax.fill(lobel_loc, var_data1, 'green', alpha=0.3)
-        self.ax.figure.canvas.draw()
+        ax = plt.subplot(polar=True)
+        ax.set_theta_offset(pi / 2)  ## 시작점
+        # ax.set_theta_direction(1)
+        ax.tick_params(axis='x', which='major', pad=15)
+        plt.xticks(lobel_loc, labels=var1, color='gray', size=10, fontsize=20)
+        ax.plot(lobel_loc, var_data1, linestyle='solid', color='green')
+        ax.fill(lobel_loc, var_data1, 'green', alpha=0.3)
+        plt.savefig('radar.png')
+        plt.clf()
+        self.graphicsView_13.setStyleSheet("border-image:url(\'./radar.png');")
 
     # menu top 5 시각화(pie chart)
     def menu_pre(self, menu):
@@ -178,6 +193,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
                     count_list.append(int(num[0]))
 
         menu_df = pd.DataFrame({'menu': menu_list, 'count': count_list}, index=None)
+        print(menu_df.head())
         menu_sorted = pd.DataFrame(data=menu_df.groupby('menu').sum().sort_values(by='count', ascending=False),
                                    index=None)
         menu_sorted['rank'] = menu_sorted['count'].rank(method='min', ascending=False)
@@ -186,8 +202,9 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         labels = menu_sorted.loc[menu_sorted.index < 5]['menu'].tolist()
         ratio = menu_sorted.loc[menu_sorted.index < 5]['count'].tolist()
 
-        labels.append('기타')
-        ratio.append(menu_sorted['count'].loc[menu_sorted.index > 5].sum())
+        # 기타 항목 추가 되는 부분
+        # labels.append('기타')
+        # ratio.append(menu_sorted['count'].loc[menu_sorted.index > 5].sum())
 
         explode = [0.05 for i in range(len(labels))]
 
@@ -200,6 +217,119 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         self.ax.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
         self.ax.figure.canvas.draw()
 
+    def match_pie(self, star_t, pred):
+        print('match pie')
+        star = [len(s) for s in star_t]  # 별 개수 세서 리스트로 저장
+        pred_trunc = list(map(math.trunc, pred))  # 예측 결과 소수점 이하 버림
+
+        result = [s == p for s, p in zip(star, pred_trunc)]  # 일치 여부 비교
+        ratio = [result.count(True), result.count(False)]  # 일치율, 불일치율 저장
+
+        labels = ['일치율', '불일치율']
+        ratio = ratio
+
+        explode = [0.05 for i in range(len(labels))]
+
+        # ui에 matplot 띄우기
+        canvas = FigureCanvas()
+        vbox = QVBoxLayout(self.graphicsView_9)
+        vbox.addWidget(canvas)
+        self.ax = canvas.figure.subplots()
+        colors = ['#f7ecb0', '#ffb3e6', '#99ff99', '#66b3ff', '#c7b3fb', '#ff6666', '#f9c3b7']
+        self.ax.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
+        self.ax.figure.canvas.draw()
+
+    def star_compare(self, stars, pred_review):
+        print('star compare')
+        stars = list(map(len, stars))
+        # pred_review = list(map(round, pred_review))
+
+        x = range(len(stars))
+        plt.plot(x, stars, label='요기요')
+        plt.plot(x, pred_review, label='모델')
+
+        plt.xlabel('리뷰')
+        plt.ylabel('평점')
+
+        plt.fill_between(x=x, y1=stars, y2=0, alpha=0.2)
+        plt.fill_between(x=x, y1=pred_review, y2=0, alpha=0.2)
+
+        plt.ylim(0,6)
+        plt.legend(loc="lower right")
+        # plt 이미지 저장
+        plt.savefig('pie.png')
+        plt.clf()
+        self.graphicsView_8.setStyleSheet("border-image:url(\'./pie.png');")
+
+    def pos_neg_pie(self, pred_review):
+        print('pos neg pie')
+        pos_neg = ['pos' if rev >= 3.5 else 'neg' for rev in pred_review]
+        ratio = [pos_neg.count('pos') / len(pos_neg), pos_neg.count('neg') / len(pos_neg)]
+        labels = ['긍정', '부정']
+        colors = ['#6b7ff0', '#f06b7f']
+        explode = [0.05 for i in range(len(labels))]
+
+        # ui에 matplot 띄우기
+        canvas = FigureCanvas()
+        vbox = QVBoxLayout(self.graphicsView_5)
+        vbox.addWidget(canvas)
+        self.ax = canvas.figure.subplots()
+        self.ax.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
+        self.ax.figure.canvas.draw()
+
+    def postive_review_pre(self, review):
+        print('pos review pre')
+        plt.clf()
+        engine = Okt()
+        all_nouns = engine.nouns(' '.join(review))
+        nouns = [n for n in all_nouns if len(n) > 1]
+        img = Image.open("./thumbs_up.jpg")
+        print('image get')
+        mask = np.array(img)
+        count = Counter(nouns)
+        tags = count.most_common(100)
+        wc = WordCloud(font_path='malgun', mask=mask, background_color='white', colormap='cool', width=2500,
+                       height=1500)
+        cloud = wc.generate_from_frequencies(dict(tags))
+        print('word cloud')
+        # plt.imshow(cloud, interpolation='bilinear')
+        # plt.axis('off')
+
+        # ui에 matplot 띄우기
+        canvas = FigureCanvas(Figure(figsize=(8,6)))
+        vbox = QVBoxLayout(self.graphicsView_4)
+        vbox.addWidget(canvas)
+        self.ax = canvas.figure.subplots()
+        self.ax.imshow(cloud, interpolation='bilinear')
+        self.ax.axis('off')
+        self.ax.figure.canvas.draw()
+
+        # return plt.show()
+
+    def negative_review_pre(self, review):
+        print('neg review pre')
+        engine = Okt()
+        all_nouns = engine.nouns(' '.join(review))
+        nouns = [n for n in all_nouns if len(n) > 1]
+        img = Image.open('./thumbs_down.jpg')
+        mask = np.array(img)
+        count = Counter(nouns)
+        tags = count.most_common(100)
+        wc = WordCloud(font_path='malgun', mask=mask, background_color='white', colormap='Accent', width=2500,
+                       height=1500)
+        cloud = wc.generate_from_frequencies(dict(tags))
+        # plt.imshow(cloud, interpolation='bilinear')
+        # plt.axis('off')
+
+        # ui에 matplot 띄우기
+        canvas = FigureCanvas(Figure(figsize=(8,6)))
+        vbox = QVBoxLayout(self.graphicsView_11)
+        vbox.addWidget(canvas)
+        self.ax = canvas.figure.subplots()
+        self.ax.imshow(cloud, interpolation='bilinear')
+        self.ax.axis('off')
+        self.ax.figure.canvas.draw()
+        # return plt.show()
 
 
 if __name__ == "__main__":
