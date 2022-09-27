@@ -102,8 +102,9 @@ class data_frame:
         labels = menu_sorted.loc[menu_sorted.index < 5]['menu'].tolist()
         ratio = menu_sorted.loc[menu_sorted.index < 5]['count'].tolist()
 
-        labels.append('기타')
-        ratio.append(menu_sorted['count'].loc[menu_sorted.index > 5].sum())
+        # top5가 아닌 메뉴 모두 기타 처리
+        # labels.append('기타')
+        # ratio.append(menu_sorted['count'].loc[menu_sorted.index > 5].sum())
 
         explode = [0.05 for i in range(len(labels))]
 
@@ -112,19 +113,27 @@ class data_frame:
         print(type(plt.show()))
         return plt.show()
 
-    def math_pie(self, star_t, pred):
-        star = [len(s) for s in star_t]  # 별 개수 세서 리스트로 저장
-        pred_trunc = list(map(math.trunc, pred))  # 예측 결과 소수점 이하 버림
+    def math_pie(self, dataframe, pred):
+        df = dataframe
+        df['star'] = df['Total Star'].apply(len)
+        df['pred'] = list(map(math.trunc, pred))  # 예측 결과 소수점 이하 버림
 
-        result = [s == p for s, p in zip(star, pred_trunc)]  # 일치 여부 비교
-        ratio = [result.count(True), result.count(False)]  # 일치율, 불일치율 저장
+        df['T/F'] = [s == p for s, p in zip(df.star.tolist(), df.pred.tolist())]  # 일치 여부 비교
+        df['distance'] = abs(df['star'] - df['pred'])  # 실제와 예측 차이 절댓값
+        ratio = [len(df.loc[df['T/F'] == True]), len(df.loc[df['T/F'] == False])]  # 일치율, 불일치율 저장
 
         labels = ['일치율', '불일치율']
         ratio = ratio
-
         explode = [0.05 for i in range(len(labels))]
         colors = ['#f7ecb0', '#ffb3e6', '#99ff99', '#66b3ff', '#c7b3fb', '#ff6666', '#f9c3b7']
         plt.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
+
+        # 가장 차이 많이나는 댓글 3개
+        df_sample = df.sort_values('distance', ascending=False)[:3]
+        df_sample = df_sample[['review', 'star', 'pred']].reset_index(drop=True)
+        df_sample.index = df_sample.index + 1
+        # df_sample -> 댓글 3개 dataframe
+
         return plt.show()
 
     def postive_review_pre(self, review):
