@@ -5,7 +5,6 @@ import time
 from bs4 import BeautifulSoup
 # (DataFrame)
 import pandas as pd
-import re
 
 
 class Find_Store():
@@ -83,8 +82,8 @@ class Find_Store():
             origin_more_click_count = (reviewtotal / 10) - 1
             # 원하는 댓글의 수를 입력하면  그 갯수에 맞춰 더보기를 클릭할 수 있도록 설정하기(지금은 임의로 30개를 긁어올 수 있도록 2으로 설정)
             # 2 대신 넣어야 하는 것(입력값의 변수 = x)  =>  x/10 - 1
-            # more_click_count = 2
-            more_click_count = (1000 / 10) - 1    # 댓글 1000개로 고정
+            more_click_count = 2
+            # more_click_count = (1000 / 10) - 1    # 댓글 1000개로 고정
 
             if reviewtotal < 11:
                 driver.quit()
