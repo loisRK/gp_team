@@ -1,3 +1,4 @@
+## 모델 학습 모듈
 # 모듈 가져오기
 import pandas as pd
 import re
