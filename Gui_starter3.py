@@ -24,7 +24,6 @@ from crawling_bs4 import Find_Store2
 
 font_setting()
 
-
 # 파일 불러오는 함수 생성
 def resource_path(relative_path):
     base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
