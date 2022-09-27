@@ -1,4 +1,7 @@
+import numpy as np
 import pandas as pd
+from PIL import Image
+
 from matplotlib_font import font_setting
 import re
 import matplotlib.pyplot as plt
@@ -23,23 +26,23 @@ class data_frame:
         store_df.to_csv('C:/Users/Playdata/project/data.csv')
         return store_df
 
-    def star_compare(self, stars, pred_review):
-        stars = list(map(len, stars))
-        # pred_review = list(map(round, pred_review))
+        def star_compare(self, stars, pred_review):
+            stars = list(map(len, stars))
+            # pred_review = list(map(round, pred_review))
 
-        x = range(len(stars))
-        plt.plot(x, stars, label='요기요')
-        plt.plot(x, pred_review, label='모델')
+            x = range(len(stars))
+            plt.plot(x, stars, label='요기요')
+            plt.plot(x, pred_review, label='모델')
 
-        plt.xlabel('리뷰')
-        plt.ylabel('평점')
+            plt.xlabel('리뷰')
+            plt.ylabel('평점')
 
-        plt.fill_between(x=x, y1=stars, y2=0, alpha=0.2)
-        plt.fill_between(x=x, y1=pred_review, y2=0, alpha=0.2)
+            plt.fill_between(x=x, y1=stars, y2=0, alpha=0.2)
+            plt.fill_between(x=x, y1=pred_review, y2=0, alpha=0.2)
 
-        plt.ylim(0,6)
-        plt.legend(loc="lower right")
-        plt.show()
+            plt.ylim(0,6)
+            plt.legend(loc="lower right")
+            plt.show()
 
     def pos_neg_pie(self, pred_review):
         pos_neg = ['pos' if rev >= 3.5 else 'neg' for rev in pred_review]
@@ -109,7 +112,6 @@ class data_frame:
         print(type(plt.show()))
         return plt.show()
 
-
     def math_pie(self, star_t, pred):
         star = [len(s) for s in star_t]  # 별 개수 세서 리스트로 저장
         pred_trunc = list(map(math.trunc, pred))  # 예측 결과 소수점 이하 버림
@@ -125,3 +127,56 @@ class data_frame:
         plt.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
         return plt.show()
 
+    def postive_review_pre(self, review):
+        print('pos review pre')
+        plt.clf()
+        engine = Okt()
+        all_nouns = engine.nouns(' '.join(review))
+        nouns = [n for n in all_nouns if len(n) > 1]
+        img = Image.open("./thumbs_up.jpg")
+        print('image get')
+        mask = np.array(img)
+        count = Counter(nouns)
+        tags = count.most_common(100)
+        wc = WordCloud(font_path='malgun', mask=mask, background_color='white', colormap='YlGnBu', width=2500,
+                       height=1500)
+        cloud = wc.generate_from_frequencies(dict(tags))
+        print('word cloud')
+        plt.imshow(cloud, interpolation='bilinear')
+        plt.axis('off')
+
+        # ui에 matplot 띄우기
+        # canvas = FigureCanvas(Figure(figsize=(4, 3)))
+        # vbox = QVBoxLayout(self.graphicsView_4)
+        # vbox.addWidget(canvas)
+        # self.ax = canvas.figure.subplots()
+        # self.ax.imshow(cloud, interpolation='bilinear')
+        # self.ax.axis('off')
+        # self.ax.figure.canvas.draw()
+
+        return plt.show()
+
+    def negative_review_pre(self, review):
+        print('neg review pre')
+        engine = Okt()
+        all_nouns = engine.nouns(' '.join(review))
+        nouns = [n for n in all_nouns if len(n) > 1]
+        img = Image.open('./thumbs_down.jpg')
+        mask = np.array(img)
+        count = Counter(nouns)
+        tags = count.most_common(100)
+        wc = WordCloud(font_path='malgun', mask=mask, background_color='white', colormap='YlGnBu', width=2500,
+                       height=1500)
+        cloud = wc.generate_from_frequencies(dict(tags))
+        plt.imshow(cloud, interpolation='bilinear')
+        plt.axis('off')
+
+        # ui에 matplot 띄우기
+        # canvas = FigureCanvas(Figure(figsize=(4, 3)))
+        # vbox = QVBoxLayout(self.graphicsView_11)
+        # vbox.addWidget(canvas)
+        # self.ax = canvas.figure.subplots()
+        # self.ax.imshow(cloud, interpolation='bilinear')
+        # self.ax.axis('off')
+        # self.ax.figure.canvas.draw()
+        return plt.show()
