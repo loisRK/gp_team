@@ -1,18 +1,25 @@
 # main 실행 파일
+import re
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
 import os
 import sys
 from Crawling_for_CSV import Find_Store
+from matplotlib_font import font_setting
+
+
+font_setting()
 
 # 파일 불러오는 함수 생성
 def resource_path(relative_path):
     base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
-#################main.ui 가져오기#######################
+
+################# main.ui 가져오기 #######################
 form = resource_path('main.ui')
 form_class1 = uic.loadUiType(form)[0]
+
 
 class Main_Window(QMainWindow, form_class1):
 
@@ -34,6 +41,8 @@ class Main_Window(QMainWindow, form_class1):
     def start_GP(self, sname):
         FS = Find_Store()
         FS.play(sname)
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

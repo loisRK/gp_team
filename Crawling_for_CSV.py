@@ -1,10 +1,13 @@
 # (selenium)
+import re
+
 from selenium import webdriver
 import time
 # (BeautifulSoup)
 from bs4 import BeautifulSoup
 # (DataFrame)
 import pandas as pd
+from sentiment_model import Sentiment
 
 
 class Find_Store():
@@ -30,20 +33,20 @@ class Find_Store():
         Store_link = "https://www.yogiyo.co.kr/mobile/#/"
         driver = webdriver.Chrome("./chromedriver.exe")
         driver.get(url=Store_link)
-        time.sleep(2)
+        time.sleep(3)
         driver.find_element_by_xpath('//*[@id="button_search_address"]/button[2]').click()
-        time.sleep(2)
+        time.sleep(3)
         driver.find_element_by_xpath('//*[@id="category"]/ul/li[1]/a').click()
-        time.sleep(2)
+        time.sleep(3)
 
         # 검색버튼 클릭 후 입력받은 가게명 검색창에 입력
         driver.find_element_by_xpath('//*[@id="category"]/ul/li[15]/form/div/input').click()
-        time.sleep(2)
+        time.sleep(3)
         driver.find_element_by_xpath('//*[@id="category"]/ul/li[15]/form/div/input').send_keys(sname)
 
         # search 버튼 클릭
         driver.find_element_by_xpath('//*[@id="category_search_button"]').click()
-        time.sleep(2)
+        time.sleep(3)
 
         # 가게 여부를 확인해주는 변수 check_store
         check_store = driver.find_element_by_xpath('//*[@id="content"]/div/div[7]').text == ''
@@ -59,11 +62,13 @@ class Find_Store():
             # 첫번째 가게 클릭
             driver.find_element_by_xpath(
                 '//*[@id="content"]/div/div[5]/div/div/div[1]/div/table/tbody/tr/td[2]/div/div[1]').click()
-            time.sleep(2)
+            # 푸라닭만 1000플 긁어오느라 추가한 코드
+            # driver.find_element_by_xpath('//*[@id="content"]/div/div[5]/div/div/div[2]/div').click()
+            time.sleep(3)
 
             # 클린댓글 클릭
             driver.find_element_by_xpath('//*[@id="content"]/div[2]/div[1]/ul/li[2]/a').click()
-            time.sleep(2)
+            time.sleep(3)
 
             # 가게 정보 긁어오기
             self.Star_Total = driver.find_element_by_xpath(
@@ -82,21 +87,21 @@ class Find_Store():
             origin_more_click_count = (reviewtotal / 10) - 1
             # 원하는 댓글의 수를 입력하면  그 갯수에 맞춰 더보기를 클릭할 수 있도록 설정하기(지금은 임의로 30개를 긁어올 수 있도록 2으로 설정)
             # 2 대신 넣어야 하는 것(입력값의 변수 = x)  =>  x/10 - 1
-            more_click_count = 2
-            # more_click_count = (1000 / 10) - 1    # 댓글 1000개로 고정
+            # more_click_count = 2
+            more_click_count = (1100 / 10) - 1    # 댓글 1000개로 고정
 
             if reviewtotal < 11:
                 driver.quit()
                 print("댓글이 없거나 너무 적습니다.")
             elif reviewtotal > 10:  # 이 때부터 더보기란 생성
-                for i in range(1, more_click_count + 1):
+                for i in range(1, int(more_click_count) + 1):
                     driver.find_element_by_xpath(f'//*[@id="review"]/li[{(i * 10) + 2}]/a').click()
                     time.sleep(2)
                     # return print("Success")   # for문에서 나올 때 오류가 발생하며 비정상종료됐지만 return 값이 생기니깐 비정상 종료는 안됨
                     # return을 사용하면 종료가 되는 것이기 때문에 결국 원점
-                    if i == more_click_count:
+                    if i == int(more_click_count):
                         break  # break로 해결됨
-                    elif i < more_click_count:
+                    elif i < int(more_click_count):
                         continue
                     # print('TEEEEEST')             # 하지만 이후 실행되야할 명령어들이 실행되지 않고 끝이 남
                     break
@@ -180,6 +185,32 @@ class Find_Store():
         print(staropt_df)
         print('star_opt success')
 
+
         # 데이터 프레임 합치기
         Review_info_df = pd.concat([review_df, star_df, menu_df, staropt_df], axis=1)
-        Review_info_df.to_csv(f'DF_{sname}.csv')
+        # Review_info_df.to_csv(f'DF_{sname}.csv')
+        #
+        # df = pd.read_csv('DF_또래오래.csv', index_col=0)
+        # 근영 추가
+        # 이모지로만 된 댓글 삭제
+        hangul = re.compile('[^ ㄱ-ㅣ가-힣]+')
+        Review_info_df["review"] = Review_info_df["review"].apply(lambda x: hangul.sub('', x))
+        Review_info_df.drop(Review_info_df[Review_info_df['review'] == ''].index, inplace=True)
+        Review_info_df = Review_info_df[:1000]
+
+        print(Review_info_df.head)
+
+        # 모델 실행
+        model = Sentiment()
+        review_sample = pd.DataFrame(list(Review_info_df['review']), columns=['review'])
+        print("Model predicting...")
+        output = model.get_score(review_sample)
+        print("********** 모델 결과 ***********")
+        print(output)
+        print("*******************************")
+        output_df = pd.DataFrame({'Output': output}, index=None)
+
+        Review_info_df = pd.concat([Review_info_df, output_df], axis=1)
+        print(Review_info_df.head)
+
+        Review_info_df.to_csv(f'DF_{sname}_total.csv')

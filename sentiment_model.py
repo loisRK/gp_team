@@ -17,8 +17,8 @@ working_directory = '.'
 class Sentiment:
     def __init__(self):
         # 모델 로딩
-        self.model = SentenceTransformer(f'{working_directory}/sentiment_model.h5')
-        self.embedding_df = pd.read_csv(f'{working_directory}/embedding.csv', index_col=0)
+        self.model = SentenceTransformer(f'{working_directory}/sentiment_model_re.h5')
+        self.embedding_df = pd.read_csv(f'{working_directory}/embedding_re.csv', index_col=0)
         self.embedding_df.embedding = self.embedding_df.embedding.apply(lambda x: [float(i) for i in x[1:-1].split(', ')])
 
     def predict_score(self, sample_text):

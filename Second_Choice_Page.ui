@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">background-color:rgb(199, 199, 199);</string>
   </property>
-  <widget class="QLabel" name="Store_total_star">
+  <widget class="QLabel" name="Store_total_star_1">
    <property name="geometry">
     <rect>
      <x>419</x>
@@ -49,12 +49,12 @@ background-color:  rgb(134, 199, 99);</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="Store_name">
+  <widget class="QLabel" name="Store_name_1">
    <property name="geometry">
     <rect>
-     <x>344</x>
+     <x>324</x>
      <y>49</y>
-     <width>171</width>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
@@ -82,7 +82,7 @@ background-color:  rgb(134, 199, 99);</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="Store_total_review">
+  <widget class="QLabel" name="Store_total_review_1">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -115,7 +115,7 @@ background-color:  rgb(134, 199, 99);</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_store_picture">
+  <widget class="QPushButton" name="btn_store_picture_1">
    <property name="geometry">
     <rect>
      <x>329</x>
@@ -125,7 +125,7 @@ background-color:  rgb(134, 199, 99);</string>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_star_1">
@@ -189,30 +189,6 @@ background-color:  rgb(134, 199, 99);</string>
    </property>
    <property name="text">
     <string>개</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_9">
-   <property name="geometry">
-    <rect>
-     <x>75</x>
-     <y>162</y>
-     <width>121</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">
-font: 10pt &quot;Consolas&quot;;
-font: 75 20pt &quot;나눔고딕 ExtraBold&quot;;
-color: rgb(255, 255, 127);
-	background-color: rgb(199,199,199);
-	border-radius: 15px;</string>
-   </property>
-   <property name="text">
-    <string>G r a y</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -391,9 +367,9 @@ background-color:  rgb(134, 199, 99);</string>
   <widget class="QLabel" name="Store_name_2">
    <property name="geometry">
     <rect>
-     <x>627</x>
+     <x>607</x>
      <y>49</y>
-     <width>171</width>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
@@ -431,7 +407,7 @@ background-color:  rgb(134, 199, 99);</string>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_total_reviuw_2">
@@ -656,15 +632,15 @@ background-color:  rgb(134, 199, 99);</string>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="Store_name_3">
    <property name="geometry">
     <rect>
-     <x>58</x>
+     <x>38</x>
      <y>430</y>
-     <width>171</width>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
@@ -914,15 +890,15 @@ background-color:  rgb(134, 199, 99);</string>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="Store_name_4">
    <property name="geometry">
     <rect>
-     <x>344</x>
+     <x>324</x>
      <y>430</y>
-     <width>171</width>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
@@ -1172,15 +1148,15 @@ background-color:  rgb(134, 199, 99);</string>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="Store_name_5">
    <property name="geometry">
     <rect>
-     <x>627</x>
+     <x>607</x>
      <y>430</y>
-     <width>171</width>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
@@ -1354,6 +1330,44 @@ background-color:  rgb(134, 199, 99);</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QPushButton" name="back_home">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>뒤로가기</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>162</y>
+     <width>121</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+font: 10pt &quot;Consolas&quot;;
+font: 75 20pt &quot;나눔고딕 ExtraBold&quot;;
+color: rgb(255, 255, 127);
+	background-color: rgb(199,199,199);
+	border-radius: 15px;</string>
+   </property>
+   <property name="text">
+    <string>G r a y</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <zorder>label_9</zorder>
   <zorder>graphicsView_8</zorder>
   <zorder>label_total_star_5</zorder>
   <zorder>graphicsView_7</zorder>
@@ -1374,16 +1388,15 @@ background-color:  rgb(134, 199, 99);</string>
   <zorder>Store_total_review_2</zorder>
   <zorder>label_riview_2</zorder>
   <zorder>graphicsView_4</zorder>
-  <zorder>Store_name</zorder>
-  <zorder>btn_store_picture</zorder>
-  <zorder>label_9</zorder>
+  <zorder>Store_name_1</zorder>
+  <zorder>btn_store_picture_1</zorder>
   <zorder>label_10</zorder>
   <zorder>label_total_star</zorder>
   <zorder>label_total_reviuw</zorder>
   <zorder>label_star_1</zorder>
   <zorder>label_riview_1</zorder>
-  <zorder>Store_total_star</zorder>
-  <zorder>Store_total_review</zorder>
+  <zorder>Store_total_star_1</zorder>
+  <zorder>Store_total_review_1</zorder>
   <zorder>label_total_reviuw_3</zorder>
   <zorder>Store_total_star_3</zorder>
   <zorder>label_riview_3</zorder>
@@ -1401,25 +1414,10 @@ background-color:  rgb(134, 199, 99);</string>
   <zorder>label_riview_5</zorder>
   <zorder>label_star_5</zorder>
   <zorder>Store_total_review_5</zorder>
+  <zorder>back_home</zorder>
  </widget>
  <resources/>
  <connections>
-  <connection>
-   <sender>btn_store_picture</sender>
-   <signal>clicked()</signal>
-   <receiver>Form</receiver>
-   <slot>detail_1_store()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>423</x>
-     <y>181</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>289</x>
-     <y>185</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>btn_store_picture_2</sender>
    <signal>clicked()</signal>
@@ -1475,12 +1473,28 @@ background-color:  rgb(134, 199, 99);</string>
    <slot>detail_5_store()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>641</x>
-     <y>528</y>
+     <x>628</x>
+     <y>525</y>
     </hint>
     <hint type="destinationlabel">
-     <x>572</x>
-     <y>528</y>
+     <x>571</x>
+     <y>535</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_store_picture_1</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>detail_1_store()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>385</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>234</x>
+     <y>128</y>
     </hint>
    </hints>
   </connection>
