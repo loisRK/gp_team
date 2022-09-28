@@ -19,6 +19,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from sentiment_model import Sentiment
 
+
 # 크롤링 모듈
 from crawling_bs4 import Find_Store2
 
