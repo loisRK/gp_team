@@ -8,12 +8,14 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import *
 
 # 데이터 전처리, 모델 학습 관련
-import pandas as pd
-import numpy as np
-from math import pi
-from matplotlib_font import font_setting
 import re
 import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from math import pi
+from matplotlib_font import font_setting
+
 from konlpy.tag import Okt
 from collections import Counter
 from wordcloud import WordCloud
@@ -31,10 +33,10 @@ def resource_path(relative_path):
 
 
 #################main.ui 가져오기#######################
-form = resource_path('MAIN_START.ui')
+form = resource_path('ui/MAIN_START.ui')
 form_class1 = uic.loadUiType(form)[0]
 ##############Second_Choice_Page.ui 가져오기############
-form2 = resource_path('content.ui')
+form2 = resource_path('ui/content.ui')
 form_class2 = uic.loadUiType(form2)[0]
 
 
@@ -264,15 +266,15 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         print('second window')
         # GUI : 빈칸 채우기 반환값
         self.Store_Name.setText(STORE_NAME)  # GUI: 가게이름
-        # print('fs.storename:',sname)
+        print('fs.storename:',STORE_NAME)
         self.Review_Count_total.setText(STORE_TOTAL_REVIEW)  # GUI: Total Comment
-        # print('fs.comment_total', FS.Comment_Total)
+        print('fs.comment_total', STORE_TOTAL_REVIEW)
         self.Star_Total.setText(STORE_TOTAL_STAR)  # GUI: 총 평점
-        # print('fs.star_total', FS.Star_Total)
+        print('fs.star_total', STORE_TOTAL_STAR)
 
         # logo 이미지 띄워주는 코드
         self.graphicsView.setStyleSheet(STORE_LOGO_PATH)
-
+        print('logo')
         # 실시간 크롤링 시 데이터 변수
         # review, menu, star_t, star_opt = FS.print_review()
         # print('review:', review)
@@ -283,6 +285,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         # 1000개 댓글 크롤링 후 생성한 csv 파일 사용 시 데이터 변수
         # pd.set_option('display.max_columns', None)
         df = pd.read_csv(STORE_CSV, index_col=0)
+        print('df')
         print(df.info())
         review = list(df['review'])
         menu = list(df['Menu'].dropna(axis=0))
@@ -306,6 +309,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         self.star_compare(star_t, output)  # 별점/학습 별점 차이 라인 그래프
         self.pos_neg_pie(output)  # 긍정/부정 파이차트
         self.bar_chart(star_t, output)  # 일치/불일치 비율 바 그래프
+        self.star_stack(star_t, output)     # 별점 점수별 불일치 비율
 
         # # 긍정/부정 워드클라우드
         review_sample['predict_star_t'] = output  # output list 결과를 다시 df 형식으로 변환
@@ -404,8 +408,44 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         vbox.addWidget(canvas)
         self.ax = canvas.figure.subplots()
         colors = ['#f7ecb0', '#ffb3e6', '#99ff99', '#66b3ff', '#c7b3fb', '#ff6666', '#f9c3b7']
-        self.ax.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
+        self.ax.pie(ratio, labels=labels, autopct='%.1f%%', labeldistance=0.9, colors=colors, explode=explode, shadow=True)
         self.ax.figure.canvas.draw()
+        # plt.pie(ratio, labels=labels, autopct='%.1f%%', labeldistance=1.1,
+        #         colors=colors, explode=explode, shadow=True)
+        # plt 이미지 저장
+        # plt.savefig('menu_pie.png')
+        # plt.clf()
+        # self.graphicsView_6.setStyleSheet("border-image:url(\'./menu_pie.png');")
+
+    # 별점 점수별 불일치 비율
+    def star_stack(self, star_t, output):
+        # df = pd.read_csv('/content/drive/MyDrive/프로젝트3 - GrayCorn/DF_교촌.csv')
+        #
+        # star_df = df.loc[:, ['Total Star', 'Output']]
+        # star_df['Total Star'] = [len(a) for a in star_t]
+        # star_df['Output'] = [math.trunc(a) for a in output]
+        # 데이터프레임 생성
+        star_df = pd.DataFrame({'Total Star': [len(a) for a in star_t], 'Output': [math.trunc(a) for a in output]})
+
+        starlist = [[], [], [], [], []]
+        for j in range(5):
+            for i in range(1, 6):
+                starlist[j].append(len(star_df.loc[(star_df['Total Star'] == j + 1) & (star_df['Output'] == i)]))
+
+        starlist_df = pd.DataFrame(starlist, columns=['1★', '2★', '3★', '4★', '5★'])
+        # 각 행별 칼럼별 데이터 비중
+        # df.sum(axis=1) : 행 별 총합
+        starlist_df = starlist_df.div(starlist_df.sum(axis=1), axis=0)
+
+        # 데이터프레임 행/열 전환
+        starlist_df_t = starlist_df.transpose()
+
+        # 별점 별 그래프
+        label = ['★1', '★2', '★3', '★4', '★5']
+        starlist_df_t[3].plot.bar(color='gold', figsize=(3, 6), label=f'review\n star: {label[3]}')
+        plt.xticks(range(5), label, rotation=0)
+        plt.legend(loc=2)
+        plt.show()
 
     # 불일치 댓글 예시 테이블
     def match_pie(self, dataframe, pred):
@@ -417,19 +457,23 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         df['distance'] = abs(df['star'] - df['pred'])  # 실제와 예측 차이 절댓값
 
         # 가장 차이 많이나는 댓글 3개
-        df_sample = df.sort_values('distance', ascending=False)[:4]
+        df_sample = df.sort_values('distance', ascending=False)[:]
         df_sample = df_sample[['review', 'star', 'pred']].reset_index(drop=True)
         df_sample.index = df_sample.index + 1
         # df_sample -> 댓글 3개 dataframe
         print('iloc', df_sample.iloc[0][0])
         print('iloc', df_sample.iloc[0][1])
         print('iloc', df_sample.iloc[0][2])
-        print('info', df_sample.info)
-        print('head', df_sample.head)
+        print('info', df_sample.info())
+        print('head', df_sample.head())
 
-        self.tableWidget.setColumnWidth(0, 500)
-        self.tableWidget.setColumnWidth(1, 100)
-        self.tableWidget.setColumnWidth(2, 100)
+        # 댓글 내용, 별점, 예측값 자료 생성
+        df_sample.to_csv(f'./star_pred/DF_{STORE_NAME}_pred.csv')
+
+        self.tableWidget.setColumnWidth(0, 332)
+        self.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableWidget.setColumnWidth(1, 70)
+        self.tableWidget.setColumnWidth(2, 70)
         for i in range(4):
             self.tableWidget.setItem(i, 0, QTableWidgetItem(df_sample.iloc[i][0]))
             self.tableWidget.setItem(i, 1, QTableWidgetItem(str(df_sample.iloc[i][1])))
@@ -552,6 +596,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
     # 일치율/불일치율 바 그래프
     def bar_chart(self, star_t, output):
         star = [len(s) for s in star_t]
+        output = list(map(round, output))
         result = [s == p for s, p in zip(star, output)]
         labels = ['일치율/불일치율']
         true = (result.count(True)) / len(result)  # 일치율
@@ -565,9 +610,9 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         # plt 이미지 저장
         plt.savefig('bar.png')
         plt.clf()
-        self.graphicsView_9.setStyleSheet("border-image:url(\'./bar.png');")
-        self.label_3.setText(f"일치율: {str(true * 100)} %")
-        self.label_6.setText(f"불일치율: {str(false * 100)} %")
+        self.graphicsView_10.setStyleSheet("border-image:url(\'./bar.png');")
+        self.label_21.setText(f"일치율: {str(round(true * 100, 1))} %")
+        self.label_17.setText(f"불일치율: {str(round(false * 100, 1))} %")
         # return plt.show()
 
 if __name__ == "__main__":
