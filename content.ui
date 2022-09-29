@@ -107,7 +107,7 @@ font: 75 9pt &quot;나눔고딕 ExtraBold&quot;;
 </string>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -162,6 +162,46 @@ background-color: rgb(255, 255, 127);</string>
      </property>
      <property name="text">
       <string>* 리뷰 입력 시 사용자가 입력한 별점과 직접 작성한 리뷰의 내용을 1~5점 기준으로 분석하여 각 점수를 비교한 데이터</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>80</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+color: rgb(49, 96, 182);</string>
+     </property>
+     <property name="text">
+      <string>사용자 입력 별점</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_15">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>80</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+color:rgb(255, 106, 0)</string>
+     </property>
+     <property name="text">
+      <string>모델 학습 별점</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -429,7 +469,7 @@ background-color:  rgb(134, 199, 99);</string>
    </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
-     <string>기타 자료</string>
+     <string>소비 현황 및 항목 별 별점</string>
     </attribute>
     <widget class="QGraphicsView" name="graphicsView_13">
      <property name="geometry">

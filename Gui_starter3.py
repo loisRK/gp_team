@@ -336,7 +336,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         engine = Okt()
         all_nouns = engine.nouns(' '.join(review))
         nouns = [n for n in all_nouns if len(n) > 1]
-        img = Image.open("./thumbs_up.jpg")
+        img = Image.open("thumbs_up.jpg")
         print('image get')
         mask = np.array(img)
         count = Counter(nouns)
@@ -365,7 +365,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         engine = Okt()
         all_nouns = engine.nouns(' '.join(review))
         nouns = [n for n in all_nouns if len(n) > 1]
-        img = Image.open('./thumbs_down.jpg')
+        img = Image.open('thumbs_down.jpg')
         mask = np.array(img)
         count = Counter(nouns)
         tags = count.most_common(100)

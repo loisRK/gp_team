@@ -73,11 +73,11 @@ class Main_Window(QMainWindow, form_class1):
         global goobne_csv
         global goobne_logo_path
 
-        goobne_name = '굽네치킨&피자-구로디지털점'
+        goobne_name = 'BBQ'
         goobne_total_star = '4.3'
         goobne_total_review = '1000'
-        goobne_csv = './store_csv/DF_굽네.csv'
-        goobne_logo_path = "border-image:url(\'./store_image/goobne.png');"
+        goobne_csv = './store_csv/DF_bbq.csv'
+        goobne_logo_path = "border-image:url(\'./store_image/bbq.png');"
 
         self.Store_name_2.setText(goobne_name)
         self.Store_total_star_2.setText(goobne_total_star)
@@ -113,7 +113,7 @@ class Main_Window(QMainWindow, form_class1):
         gyochon_total_star = '4.7'
         gyochon_total_review = '1000'
         gyochon_csv = './store_csv/DF_교촌.csv'
-        gyochon_logo_path = "border-image:url(\'./store_image/gyochon.png');"
+        gyochon_logo_path = "border-image:url(\'./store_image/kyochon.png');"
 
         self.Store_name_4.setText(gyochon_name)
         self.Store_total_star_4.setText(gyochon_total_star)
@@ -339,6 +339,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
 
     # 항목 별 레이더 그래프 시각화
     def star_pre(self, star_opt):
+        print('star pre')
         df = pd.Series(star_opt)
         df = pd.DataFrame(df, columns=['star'])
         data = df.star.str.split('\n')
@@ -362,6 +363,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         plt.savefig('radar.png')
         plt.clf()
         self.graphicsView_13.setStyleSheet("border-image:url(\'./radar.png');")
+        print('star pre quit')
 
     # menu top 5 시각화(pie chart)
     def menu_pre(self, menu):
@@ -406,6 +408,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         colors = ['#f7ecb0', '#ffb3e6', '#99ff99', '#66b3ff', '#c7b3fb', '#ff6666', '#f9c3b7']
         self.ax.pie(ratio, labels=labels, autopct='%.1f%%', colors=colors, explode=explode, shadow=True)
         self.ax.figure.canvas.draw()
+        print('menu draw')
 
     # 불일치 댓글 예시 테이블
     def match_pie(self, dataframe, pred):

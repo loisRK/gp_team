@@ -26,7 +26,7 @@ class Find_Store2():
 
         # 크롤링 작업
         Store_link = "https://www.yogiyo.co.kr/mobile/#/"
-        driver = webdriver.Chrome("./chromedriver.exe")
+        driver = webdriver.Chrome("chromedriver.exe")
         driver.get(url=Store_link)
         time.sleep(3)
         driver.find_element_by_xpath('//*[@id="button_search_address"]/button[2]').click()
