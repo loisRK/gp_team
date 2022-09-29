@@ -1,5 +1,5 @@
+# 크롤링 전용 GUI
 # main 실행 파일
-import re
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
 import os
@@ -41,8 +41,6 @@ class Main_Window(QMainWindow, form_class1):
     def start_GP(self, sname):
         FS = Find_Store()
         FS.play(sname)
-
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
