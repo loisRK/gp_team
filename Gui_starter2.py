@@ -21,10 +21,10 @@ def resource_path(relative_path):
 
 
 #################main.ui 가져오기#######################
-form = resource_path('main.ui')
+form = resource_path('ui/main.ui')
 form_class1 = uic.loadUiType(form)[0]
 #################content.ui 가져오기##############
-form2 = resource_path('content.ui')
+form2 = resource_path('ui/content.ui')
 form_class2 = uic.loadUiType(form2)[0]
 
 

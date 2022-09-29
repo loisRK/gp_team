@@ -199,7 +199,6 @@ class Find_Store():
         Review_info_df = Review_info_df[:1000]
 
         print(Review_info_df.head)
-
         # 모델 실행
         model = Sentiment()
         review_sample = pd.DataFrame(list(Review_info_df['review']), columns=['review'])
