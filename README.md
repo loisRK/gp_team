@@ -28,3 +28,10 @@ pip install bs4==0.0.1</br>
 pip install konlpy==0.6.0</br>
 pip install wordcloud==1.8.2.2</br>
 pip install matplotlib==3.6.0</br>
+
+#### [GUI 화면]</br>
+<img width="50%" src="https://user-images.githubusercontent.com/95171615/193223374-3f65efc1-a3cc-4684-b09b-0f6339528e45.PNG"/>
+<img width="50%" src="https://user-images.githubusercontent.com/95171615/193223377-b332605f-3b00-4a80-b835-ff4c5c28f08b.PNG"/>
+<img width="50%" src="https://user-images.githubusercontent.com/95171615/193223381-7b98ff73-3c10-41dd-bcfa-5f03d3fa5b05.PNG"/>
+<img width="50%" src="https://user-images.githubusercontent.com/95171615/193223383-3de44913-008d-4fb8-8dc3-deb2691b3b12.PNG"/>
+<img width="50%" src="https://user-images.githubusercontent.com/95171615/193223385-6ae11b53-be68-4e71-9b21-42768d886bcc.PNG"/>
