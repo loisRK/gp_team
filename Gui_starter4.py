@@ -4,7 +4,7 @@ import os
 import sys
 import math
 from PIL import Image
-from PyQt5 import uic
+from PyQt5 import uic, QtGui
 from PyQt5.QtWidgets import *
 
 # 데이터 전처리, 모델 학습 관련
@@ -12,7 +12,6 @@ import re
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import seaborn as sns
 from math import pi
 from matplotlib_font import font_setting
 
@@ -49,42 +48,41 @@ class Main_Window(QMainWindow, form_class1):
 
     def store_info(self):
         # 음식점 데이터
-        # 지코바
-        global gcova_name
-        global gcova_total_star
-        global gcova_total_review
-        global gcova_csv
-        global gcova_logo_path
+        # BBQ
+        global bbq_name
+        global bbq_total_star
+        global bbq_total_review
+        global bbq_csv
+        global bbq_logo_path
 
-        gcova_name = '지코바-독산1호점'
-        gcova_total_star = '4.9'
-        gcova_total_review = '1000'
-        gcova_csv = './store_csv/DF_지코바.csv'
-        gcova_logo_path = "border-image:url(\'./store_image/gcova.png');"
+        bbq_name = 'BBQ'
+        bbq_total_star = '4.9'
+        bbq_total_review = '1000'
+        bbq_csv = './store_csv/DF_bbq.csv'
+        bbq_logo_path = "border-image:url(\'./store_image/bbq.png');"
 
-        self.Store_name_1.setText(gcova_name)
-        self.Store_total_star_1.setText(gcova_total_star)
-        self.Store_total_review_1.setText(gcova_total_review)
-        self.btn_store_picture_1.setStyleSheet(gcova_logo_path)
+        self.Store_name_1.setText(bbq_name)
+        self.Store_total_star_1.setText(bbq_total_star)
+        self.Store_total_review_1.setText(bbq_total_review)
+        self.btn_store_picture_1.setStyleSheet(bbq_logo_path)
 
+        # 네네치킨
+        global nene_name
+        global nene_total_star
+        global nene_total_review
+        global nene_csv
+        global nene_logo_path
 
-        # 굽네치킨
-        global goobne_name
-        global goobne_total_star
-        global goobne_total_review
-        global goobne_csv
-        global goobne_logo_path
+        nene_name = '네네치킨-철산역점'
+        nene_total_star = '4.9'
+        nene_total_review = '2465'
+        nene_csv = './store_csv/DF_네네.csv'
+        nene_logo_path = "border-image:url(\'./store_image/nene.png');"
 
-        goobne_name = '굽네치킨&피자-구로디지털점'
-        goobne_total_star = '4.3'
-        goobne_total_review = '1000'
-        goobne_csv = './store_csv/DF_굽네.csv'
-        goobne_logo_path = "border-image:url(\'./store_image/goobne.png');"
-
-        self.Store_name_2.setText(goobne_name)
-        self.Store_total_star_2.setText(goobne_total_star)
-        self.Store_total_review_2.setText(goobne_total_review)
-        self.btn_store_picture_2.setStyleSheet(goobne_logo_path)
+        self.Store_name_2.setText(nene_name)
+        self.Store_total_star_2.setText(nene_total_star)
+        self.Store_total_review_2.setText(nene_total_review)
+        self.btn_store_picture_2.setStyleSheet(nene_logo_path)
 
         # 푸라닭
         global puradak_name
@@ -95,7 +93,7 @@ class Main_Window(QMainWindow, form_class1):
 
         puradak_name = '푸라닭-미성점'
         puradak_total_star = '4.9'
-        puradak_total_review = '1000'
+        puradak_total_review = '3162'
         puradak_csv = './store_csv/DF_푸라닭.csv'
         puradak_logo_path = "border-image:url(\'./store_image/puradak.png');"
 
@@ -113,7 +111,7 @@ class Main_Window(QMainWindow, form_class1):
 
         gyochon_name = '교촌치킨-독산1호점'
         gyochon_total_star = '4.7'
-        gyochon_total_review = '1000'
+        gyochon_total_review = '1921'
         gyochon_csv = './store_csv/DF_교촌.csv'
         gyochon_logo_path = "border-image:url(\'./store_image/gyochon.png');"
 
@@ -122,23 +120,23 @@ class Main_Window(QMainWindow, form_class1):
         self.Store_total_review_4.setText(gyochon_total_review)
         self.btn_store_picture_4.setStyleSheet(gyochon_logo_path)
 
-        # 또래오래
-        global ddorea_name
-        global ddorea_total_star
-        global ddorea_total_review
-        global ddorea_csv
-        global ddorea_logo_path
+        # 멕시카나
+        global mexicana_name
+        global mexicana_total_star
+        global mexicana_total_review
+        global mexicana_csv
+        global mexicana_logo_path
 
-        ddorea_name = '또래오래-독산가산점'
-        ddorea_total_star = '4.9'
-        ddorea_total_review = '1000'
-        ddorea_csv = './store_csv/DF_또래오래.csv'
-        ddorea_logo_path = "border-image:url(\'./store_image/ddorea.png');"
+        mexicana_name = '멕시카나-시흥점'
+        mexicana_total_star = '4.6'
+        mexicana_total_review = '2109'
+        mexicana_csv = './store_csv/DF_멕시카나.csv'
+        mexicana_logo_path = "border-image:url(\'./store_image/mexicana.png');"
 
-        self.Store_name_5.setText(ddorea_name)
-        self.Store_total_star_5.setText(ddorea_total_star)
-        self.Store_total_review_5.setText(ddorea_total_review)
-        self.btn_store_picture_5.setStyleSheet(ddorea_logo_path)
+        self.Store_name_5.setText(mexicana_name)
+        self.Store_total_star_5.setText(mexicana_total_star)
+        self.Store_total_review_5.setText(mexicana_total_review)
+        self.btn_store_picture_5.setStyleSheet(mexicana_logo_path)
 
     def detail_1_store(self):
         global STORE_NAME
@@ -146,11 +144,11 @@ class Main_Window(QMainWindow, form_class1):
         global STORE_TOTAL_STAR
         global STORE_CSV
         global STORE_LOGO_PATH
-        STORE_NAME = gcova_name
-        STORE_TOTAL_REVIEW = gcova_total_review
-        STORE_TOTAL_STAR =gcova_total_star
-        STORE_CSV = gcova_csv
-        STORE_LOGO_PATH = gcova_logo_path
+        STORE_NAME = bbq_name
+        STORE_TOTAL_REVIEW = bbq_total_review
+        STORE_TOTAL_STAR = bbq_total_star
+        STORE_CSV = bbq_csv
+        STORE_LOGO_PATH = bbq_logo_path
         print(STORE_NAME)
         print(STORE_TOTAL_REVIEW)
         print(STORE_TOTAL_STAR)
@@ -165,11 +163,11 @@ class Main_Window(QMainWindow, form_class1):
         global STORE_TOTAL_STAR
         global STORE_CSV
         global STORE_LOGO_PATH
-        STORE_NAME = goobne_name
-        STORE_TOTAL_REVIEW = goobne_total_review
-        STORE_TOTAL_STAR = goobne_total_star
-        STORE_CSV = goobne_csv
-        STORE_LOGO_PATH = goobne_logo_path
+        STORE_NAME = nene_name
+        STORE_TOTAL_REVIEW = nene_total_review
+        STORE_TOTAL_STAR = nene_total_star
+        STORE_CSV = nene_csv
+        STORE_LOGO_PATH = nene_logo_path
         print(STORE_NAME)
         print(STORE_TOTAL_REVIEW)
         print(STORE_TOTAL_STAR)
@@ -185,7 +183,7 @@ class Main_Window(QMainWindow, form_class1):
         global STORE_CSV
         global STORE_LOGO_PATH
         STORE_NAME = puradak_name
-        STORE_TOTAL_REVIEW = ddorea_total_review
+        STORE_TOTAL_REVIEW = puradak_total_review
         STORE_TOTAL_STAR = puradak_total_star
         STORE_CSV = puradak_csv
         STORE_LOGO_PATH = puradak_logo_path
@@ -222,11 +220,11 @@ class Main_Window(QMainWindow, form_class1):
         global STORE_TOTAL_STAR
         global STORE_CSV
         global STORE_LOGO_PATH
-        STORE_NAME = ddorea_name
-        STORE_TOTAL_REVIEW = ddorea_total_review
-        STORE_TOTAL_STAR =ddorea_total_star
-        STORE_CSV = ddorea_csv
-        STORE_LOGO_PATH = ddorea_logo_path
+        STORE_NAME = mexicana_name
+        STORE_TOTAL_REVIEW = mexicana_total_review
+        STORE_TOTAL_STAR = mexicana_total_star
+        STORE_CSV = mexicana_csv
+        STORE_LOGO_PATH = mexicana_logo_path
         print(STORE_NAME)
         print(STORE_TOTAL_REVIEW)
         print(STORE_TOTAL_STAR)
@@ -285,18 +283,18 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         # 1000개 댓글 크롤링 후 생성한 csv 파일 사용 시 데이터 변수
         # pd.set_option('display.max_columns', None)
         df = pd.read_csv(STORE_CSV, index_col=0)
-        print('df')
-        print(df.info())
         review = list(df['review'])
         menu = list(df['Menu'].dropna(axis=0))
         star_t = list(df['Total Star'])
         star_opt = list(df['Star_opt'])
         output = list(df['Output'])
-        print('review:', review)
-        print('menu:', menu)
-        print('star_t:', star_t)
-        print('star_opt:', star_opt)
-        print('Output:', output)
+        date = list(df['Date'])
+        # print('review:', review)
+        # print('menu:', menu)
+        # print('star_t:', star_t)
+        # print('star_opt:', star_opt)
+        # print('Output:', output)
+        print('Date:', date)
 
         review_sample = pd.DataFrame(review, columns=['review'])
         avg = round(np.mean(output), 1)
@@ -306,10 +304,17 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         self.menu_pre(menu)  # menu top 5 시각화(pie chart)
         self.star_pre(star_opt)  # 항목별 별점 레이더 차트
         self.match_pie(df, output)  # 불일치 댓글 예시
-        self.star_compare(star_t, output)  # 별점/학습 별점 차이 라인 그래프
+        self.star_compare(star_t, output, date)  # 별점/학습 별점 차이 라인 그래프
         self.pos_neg_pie(output)  # 긍정/부정 파이차트
         self.bar_chart(star_t, output)  # 일치/불일치 비율 바 그래프
-        self.star_stack(star_t, output)     # 별점 점수별 불일치 비율
+        self.star_stack(star_t, output)
+
+        self.comboBox.addItem("5")
+        self.comboBox.addItem("4")
+        self.comboBox.addItem("3")
+        self.comboBox.addItem("2")
+        self.comboBox.addItem("1")
+        self.comboBox.currentIndexChanged.connect(self.play)    # 콤보박스 활성화
 
         # # 긍정/부정 워드클라우드
         review_sample['predict_star_t'] = output  # output list 결과를 다시 df 형식으로 변환
@@ -419,33 +424,44 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
 
     # 별점 점수별 불일치 비율
     def star_stack(self, star_t, output):
-        # df = pd.read_csv('/content/drive/MyDrive/프로젝트3 - GrayCorn/DF_교촌.csv')
-        #
-        # star_df = df.loc[:, ['Total Star', 'Output']]
-        # star_df['Total Star'] = [len(a) for a in star_t]
-        # star_df['Output'] = [math.trunc(a) for a in output]
+        print('star_stack')
         # 데이터프레임 생성
         star_df = pd.DataFrame({'Total Star': [len(a) for a in star_t], 'Output': [math.trunc(a) for a in output]})
+        print(star_df)
 
         starlist = [[], [], [], [], []]
         for j in range(5):
             for i in range(1, 6):
                 starlist[j].append(len(star_df.loc[(star_df['Total Star'] == j + 1) & (star_df['Output'] == i)]))
+        print(starlist)
 
-        starlist_df = pd.DataFrame(starlist, columns=['1★', '2★', '3★', '4★', '5★'])
+        label = ['★1', '★2', '★3', '★4', '★5']
+        starlist_df = pd.DataFrame(starlist, columns=label)
         # 각 행별 칼럼별 데이터 비중
         # df.sum(axis=1) : 행 별 총합
         starlist_df = starlist_df.div(starlist_df.sum(axis=1), axis=0)
+        print(starlist_df)
 
         # 데이터프레임 행/열 전환
         starlist_df_t = starlist_df.transpose()
+        print(starlist_df_t)
 
         # 별점 별 그래프
-        label = ['★1', '★2', '★3', '★4', '★5']
-        starlist_df_t[3].plot.bar(color='gold', figsize=(3, 6), label=f'review\n star: {label[3]}')
-        plt.xticks(range(5), label, rotation=0)
-        plt.legend(loc=2)
-        plt.show()
+        plt.clf()
+        for i in range(5):
+            starlist_df_t[i].plot.bar(color='gold', figsize=(3, 6))
+            plt.xticks(range(5), label, rotation=0)
+            # plt 이미지 저장
+            plt.savefig(f'./star_bar/starBar{i+1}.png')
+
+        # default 그래프 설정
+        self.graphicsView_14.setStyleSheet("border-image:url(\'star_bar/starBar5.png');")
+
+    # 콤보박스 선택 시 그래프 전환
+    def play(self):
+        n = int(str(self.comboBox.currentText()))
+        print('n: ', n)
+        self.graphicsView_14.setStyleSheet(f"border-image:url(\'star_bar/starBar{n}.png');")
 
     # 불일치 댓글 예시 테이블
     def match_pie(self, dataframe, pred):
@@ -461,11 +477,11 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         df_sample = df_sample[['review', 'star', 'pred']].reset_index(drop=True)
         df_sample.index = df_sample.index + 1
         # df_sample -> 댓글 3개 dataframe
-        print('iloc', df_sample.iloc[0][0])
-        print('iloc', df_sample.iloc[0][1])
-        print('iloc', df_sample.iloc[0][2])
-        print('info', df_sample.info())
-        print('head', df_sample.head())
+        # print('5-1', df_sample.iloc[0][0])
+        # print('1-5', df_sample.iloc[0][1])
+        # print('iloc', df_sample.iloc[0][2])
+        # print('info', df_sample.info())
+        # print('head', df_sample.head())
 
         # 댓글 내용, 별점, 예측값 자료 생성
         df_sample.to_csv(f'./star_pred/DF_{STORE_NAME}_pred.csv')
@@ -480,14 +496,17 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
             self.tableWidget.setItem(i, 2, QTableWidgetItem(str(df_sample.iloc[i][2])))
 
     # 별점/학습별점 비교 라인 그래프
-    def star_compare(self, stars, pred_review):
+    def star_compare(self, stars, pred_review, date):
         print('star compare')
         stars = list(map(len, stars))
         # pred_review = list(map(round, pred_review))
 
         diff = [stars[i] - pred_review[i] for i in range(len(pred_review))]
-        df = pd.DataFrame({'stars': stars, 'pred_review': pred_review, 'diff': diff})
+        df = pd.DataFrame({'stars': stars, 'pred_review': pred_review, 'diff': diff, 'date': date})
+        print(df.head())
         df.sort_values(by=['diff', 'stars', 'pred_review'], inplace=True)
+        print('8888')
+        print(df.head())
 
         stars = round(df.stars)
         pred_review = round(df.pred_review)

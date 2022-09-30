@@ -7,6 +7,8 @@ import time
 from bs4 import BeautifulSoup
 # (DataFrame)
 import pandas as pd
+from datetime import datetime
+
 from sentiment_model import Sentiment
 
 
@@ -28,10 +30,11 @@ class Find_Store():
         global star_opt
         global Star_Total
         global Comment_Total
+        global date_list
 
         # 크롤링 작업
         Store_link = "https://www.yogiyo.co.kr/mobile/#/"
-        driver = webdriver.Chrome("./chromedriver.exe")
+        driver = webdriver.Chrome("chromedriver.exe")
         driver.get(url=Store_link)
         time.sleep(3)
         driver.find_element_by_xpath('//*[@id="button_search_address"]/button[2]').click()
@@ -88,7 +91,8 @@ class Find_Store():
             # 원하는 댓글의 수를 입력하면  그 갯수에 맞춰 더보기를 클릭할 수 있도록 설정하기(지금은 임의로 30개를 긁어올 수 있도록 2으로 설정)
             # 2 대신 넣어야 하는 것(입력값의 변수 = x)  =>  x/10 - 1
             # more_click_count = 2
-            more_click_count = (1100 / 10) - 1    # 댓글 1000개로 고정
+            # more_click_count = (1100 / 10) - 1    # 댓글 1000개로 고정
+            more_click_count = origin_more_click_count
 
             if reviewtotal < 11:
                 driver.quit()
@@ -108,13 +112,18 @@ class Find_Store():
             print('더보기란 클릭 완료')
             # --------------------------------------------------------------------------------------------------------------
 
+        # html 긁어오기 전 충분히 로딩할 시간 부여
+        time.sleep(60)
+
         # selenium 작업으로 더보기 펼친 후 html 긁어오기
         html = driver.page_source
         print('html')
         # print(html)
 
+        time.sleep(3)
         soup = BeautifulSoup(html, 'html.parser')
         # id=review 인 ul 태그 가져오기
+        time.sleep(3)
         review_tag = soup.select_one("ul.list-group.review-list")
         # print(review_tag)
 
@@ -122,18 +131,26 @@ class Find_Store():
         menu_list = []
         star_list = []
         star_opt = []
+        date_list = []
 
+        time.sleep(3)
+
+        # 리뷰 review
         # ul tag 중 원하는 tag 가져오기
         for p in review_tag.find_all("p", class_="ng-binding", attrs={"ng-show": "review.comment"}):
             review_list.append(p.get_text())
         print(len(review_list))
         print(review_list)
 
+        time.sleep(3)
+
         # 리뷰 메뉴
         for div in review_tag.select('div.order-items.default.ng-binding'):
             menu_list.append(div.get_text())
         print(len(menu_list))
         print(menu_list)
+
+        time.sleep(3)
 
         # 리뷰 total star
         for s in review_tag.select('div.star-point > span.total'):
@@ -144,11 +161,29 @@ class Find_Store():
         print(len(star_list))
         print(star_list)
 
+        time.sleep(3)
+
         # 리뷰 품목별 star
         for s in review_tag.select('div.star-point > span.category'):
             star_opt.append(s.get_text())
         print(len(star_opt))
         print(star_opt)
+
+        time.sleep(3)
+
+        print('check')
+
+        # 리뷰 날짜
+        for s in review_tag.select('span.review-time.ng-binding'):
+            s1 = s.get_text()
+            s2 = s1.split(' ')
+            if len(s2) == 3:
+                s3 = s2[0] + ' ' + s2[1]
+                date_list.append(s3)
+        print(len(date_list))
+        print(date_list)
+
+        time.sleep(3)
 
 # 크롤링 완---------------------------------------------------------------------------------------------------------
 
@@ -156,11 +191,14 @@ class Find_Store():
         global menu_df
         global star_df
         global staropt_df
+        global date_df
 
         # review_df 만들기
         review_df = pd.DataFrame({"review":review_list}, index=None)
         print(review_df)
         print('review success')
+
+        time.sleep(3)
 
         # menu_df 만들기
         menulist = []
@@ -170,46 +208,116 @@ class Find_Store():
             m1 = m1.replace('\n', '').strip()
             menulist.append(m1)
 
-
         menu_df = pd.DataFrame({'Menu': menulist}, index=None)
         print(menu_df)
         print('menu success')
+
+        time.sleep(3)
 
         # star_df 만들기
         star_df = pd.DataFrame({"Total Star":star_list}, index=None)
         print(star_df)
         print('star success')
 
+        time.sleep(3)
+
         # staropt_df 만들기
         staropt_df = pd.DataFrame({'Star_opt':star_opt}, index=None)
         print(staropt_df)
         print('star_opt success')
 
+        time.sleep(3)
+
+        # date_df 만들기
+        date_df = pd.DataFrame({'Date':date_list}, index=None)
+        print('date success')
+
+        time.sleep(3)
+
 
         # 데이터 프레임 합치기
-        Review_info_df = pd.concat([review_df, star_df, menu_df, staropt_df], axis=1)
-        # Review_info_df.to_csv(f'DF_{sname}.csv')
-        #
-        # df = pd.read_csv('DF_또래오래.csv', index_col=0)
-        # 근영 추가
-        # 이모지로만 된 댓글 삭제
-        hangul = re.compile('[^ ㄱ-ㅣ가-힣]+')
-        Review_info_df["review"] = Review_info_df["review"].apply(lambda x: hangul.sub('', x))
-        Review_info_df.drop(Review_info_df[Review_info_df['review'] == ''].index, inplace=True)
-        Review_info_df = Review_info_df[:1000]
+        Review_info_df = pd.concat([review_df, star_df, menu_df, staropt_df, date_df], axis=1)
+        print('Merge success')
 
-        print(Review_info_df.head)
+        time.sleep(3)
+
+        # 고객이 남긴 데이터들이 담겨있는 데이터프레임 원본을 csv파일로 변환
+        Review_info_df.to_csv(f'Original_{sname}.csv')
+
+        time.sleep(3)
+
+
+        # 원하는 기간의 데이터 추출 ----------------------------------------------------------------------------------------
+        # 원하는 기간을 최근 1년으로 정함
+        # from datetime import datetime 필요
+        d_list = []
+
+        now_year = datetime.today().year
+        now_month = datetime.today().month
+
+        for d in range(now_month, 13):
+            d_list.append(str(now_year - 1) + '년 ' + str(d) + '월')
+
+        for d in range(1, now_month):
+            d_list.append(str(now_year) + '년 ' + str(d) + '월')
+
+        print(d_list)
+
+        Before_Review_df = Review_info_df[Review_info_df['Date'].isin(d_list)]
+
+        print('final success')
+
+        time.sleep(3)
+        # --------------------------------------------------------------------------------------------------------------
+
+        # 이모지로만 된 댓글 삭제-------------------------------------------------------------------------------------------
+        hangul = re.compile('[^ ㄱ-ㅣ가-힣]+')
+        Before_Review_df["review"] = Before_Review_df["review"].apply(lambda x: hangul.sub('', x))
+
+        time.sleep(3)
+        Before_Review_df.drop(Before_Review_df[Before_Review_df['review'] == ''].index, inplace=True)
+
+        time.sleep(3)
+        # --------------------------------------------------------------------------------------------------------------
+
+        # print(Before_Review_df)
+        print('###INFO###')
+        print(Before_Review_df.info())
+
+        # 최근 1년간의 데이터들이 담긴 Review 데이터 프레임을 csv변환
+        Before_Review_df.to_csv(f'Before_{sname}.csv')
+
+        print(Before_Review_df.tail())
+
+
+        # 예측 점수 컬럼이 포함된 최종 리뷰 데이터프레임 만들기------------------------------------------------------------------
+        After_Review_df = Before_Review_df
+
         # 모델 실행
-        model = Sentiment()
-        review_sample = pd.DataFrame(list(Review_info_df['review']), columns=['review'])
+        from sentence_transformers import SentenceTransformer
+        from keras.models import load_model
+        import numpy as np
+
+        model = SentenceTransformer('jhgan/ko-sroberta-multitask')
+        df_em = pd.DataFrame({'word': After_Review_df["review"],
+                              'embedding': pd.Series([] * len(After_Review_df["review"]))})
+        df_em['embedding'] = df_em['word'].map(lambda x: list(model.encode(x)))
+
+        model = load_model('./review_predict.h5')
+        feature = np.vstack(df_em.embedding.values)
         print("Model predicting...")
-        output = model.get_score(review_sample)
+        predict_score = model.predict(feature)
+        output = [x + 1 for x in map(np.argmax, predict_score)]
         print("********** 모델 결과 ***********")
         print(output)
         print("*******************************")
+
         output_df = pd.DataFrame({'Output': output}, index=None)
 
-        Review_info_df = pd.concat([Review_info_df, output_df], axis=1)
-        print(Review_info_df.head)
+        After_Review_df = pd.concat([After_Review_df, output_df], axis=1)
+        After_Review_df = After_Review_df.dropna()
+        print(After_Review_df.head)
 
-        Review_info_df.to_csv(f'DF_{sname}_total.csv')
+        After_Review_df.to_csv(f'After_{sname}_total.csv')
+
+        print('★☆Finish☆★')
