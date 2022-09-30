@@ -18,13 +18,13 @@
   위에서 생성한 CSV 파일 기반 시각화 프로그램 실행 파일
   
   
-[pip install list]
-pip install sentence_transformers==2.2.2
-pip install keras==2.10.0
-pip install tensorflow==2.10.0
-pip install regex==2022.3.15
-pip install selenium==3.14.1
-pip install bs4==0.0.1
-pip install konlpy==0.6.0
-pip install wordcloud==1.8.2.2
-pip install matplotlib==3.6.0
+[pip install list]</br>
+pip install sentence_transformers==2.2.2</br>
+pip install keras==2.10.0</br>
+pip install tensorflow==2.10.0</br>
+pip install regex==2022.3.15</br>
+pip install selenium==3.14.1</br>
+pip install bs4==0.0.1</br>
+pip install konlpy==0.6.0</br>
+pip install wordcloud==1.8.2.2</br>
+pip install matplotlib==3.6.0</br>
