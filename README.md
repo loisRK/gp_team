@@ -28,6 +28,7 @@ pip install bs4==0.0.1</br>
 pip install konlpy==0.6.0</br>
 pip install wordcloud==1.8.2.2</br>
 pip install matplotlib==3.6.0</br>
+pip install pyqt5-tools</br>
 
 #### [GUI 화면]</br>
 <img width="50%" src="https://user-images.githubusercontent.com/95171615/193223374-3f65efc1-a3cc-4684-b09b-0f6339528e45.PNG"/>
