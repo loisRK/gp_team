@@ -18,7 +18,7 @@
   위에서 생성한 CSV 파일 기반 시각화 프로그램 실행 파일
   
   
-[pip install list]</br>
+#### [pip install list]</br>
 pip install sentence_transformers==2.2.2</br>
 pip install keras==2.10.0</br>
 pip install tensorflow==2.10.0</br>
