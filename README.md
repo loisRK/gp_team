@@ -31,7 +31,10 @@ pip install matplotlib==3.6.0</br>
 pip install pyqt5-tools</br>
 pip install JPype1==1.3.0</br>
 
-#### [GUI 화면]</br>
+#### [GUI 화면 GIF]</br>
+<img width="100%" src="https://user-images.githubusercontent.com/95171615/193236626-4424f5e3-6bcb-44c2-a7f8-69ac2c7d6900.gif"/>
+
+#### [GUI 화면 PDF]</br>
 <img width="50%" src="https://user-images.githubusercontent.com/95171615/193223374-3f65efc1-a3cc-4684-b09b-0f6339528e45.PNG"/>
 <img width="50%" src="https://user-images.githubusercontent.com/95171615/193223377-b332605f-3b00-4a80-b835-ff4c5c28f08b.PNG"/>
 <img width="50%" src="https://user-images.githubusercontent.com/95171615/193223381-7b98ff73-3c10-41dd-bcfa-5f03d3fa5b05.PNG"/>
