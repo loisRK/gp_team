@@ -1,20 +1,19 @@
-# gp_team
-machine learning team project
+# 팀명: GrayCorn
+### 팀원: 김륜경, 정계진, 장우성, 조혜원, 채근영
+## 프로젝트 주제: 배달 플랫폼의 음식점 리뷰를 분석하여 사용자가 등록한 별점과 리뷰의 실제 내용의 일치 여부를 판별하여 고객에게 음식점에 대한 다양한 인사이트 제공
 
-- Gui_starter.py
-  시작 프로그램 파일
-  실행 시 GUI 시작
-- Crawling_Store.py
-  [selenium] 입력한 가게 댓글 및 평점 크롤링 코드
-- crawling_bs4.py
-  [selenium],[bs4] 크롤링 시간 절약을 위한 새로운 크롤링 코드
-- data_preprocessing.py
-  크롤링 해온 리뷰 데이터 전처리 코드
-- Page_Gui_Test.py / Page_Gui_Test.ui
-  GUI Designer로 생성한 자동완성 GUI 파일 (손대지 말것)
 
-- chromedriver.exe : 크롬 실행 응용프로그램
-- uic.exe : designer 파일 변환 응용프로그램
-
-- Sentiment 모델 다운로드 링크 (sentiment_model.h5, embedding.csv)
-https://drive.google.com/drive/folders/1cn9ZR3wV6WRPuKWvNZ69ncUPjHLlSwfS?usp=sharing
+[자료 수집 및 데이터 전처리]
+- Gui_for_csv.py
+  Crawling_for_csv.py 실행 파일
+  
+- Crawling_for_csv.py
+  데이터 수집
+  데이터 전처리
+  모델 학습
+  결과 예측 및 csv 파일 생성
+  
+[프로그램 실행]
+<b> - Gui_starter4.py </b>
+  위에서 생성한 CSV 파일 기반 시각화 프로그램 실행 파일
+  
