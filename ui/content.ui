@@ -484,12 +484,38 @@ background-color: rgb(255, 255, 127);</string>
       <string notr="true"/>
      </property>
     </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>68</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius: 15px;
+background-color:  rgb(232, 232, 232);
+
+
+font: 10pt &quot;Consolas&quot;;
+font: 75 9pt &quot;나눔고딕 ExtraBold&quot;;
+color: black;</string>
+     </property>
+     <property name="text">
+      <string>학습된 별점 분포</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
     <zorder>graphicsView_12</zorder>
     <zorder>label_19</zorder>
     <zorder>label_22</zorder>
     <zorder>tableWidget</zorder>
     <zorder>graphicsView_14</zorder>
     <zorder>comboBox</zorder>
+    <zorder>label</zorder>
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
