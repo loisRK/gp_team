@@ -1,5 +1,5 @@
+# 크롤링 전용 GUI
 # main 실행 파일
-import re
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
 import os
@@ -17,7 +17,7 @@ def resource_path(relative_path):
 
 
 ################# main.ui 가져오기 #######################
-form = resource_path('ui/main.ui')
+form = resource_path('main.ui')
 form_class1 = uic.loadUiType(form)[0]
 
 
@@ -41,8 +41,6 @@ class Main_Window(QMainWindow, form_class1):
     def start_GP(self, sname):
         FS = Find_Store()
         FS.play(sname)
-
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
