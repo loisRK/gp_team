@@ -94,7 +94,7 @@ class Main_Window(QMainWindow, form_class1):
         puradak_name = '푸라닭-미성점'
         puradak_total_star = '4.9'
         puradak_total_review = '3162'
-        puradak_csv = './store_csv/DF_푸라닭.csv'
+        puradak_csv = 'store_csv/DF_푸라닭.csv'
         puradak_logo_path = "border-image:url(\'./store_image/puradak.png');"
 
         self.Store_name_3.setText(puradak_name)
@@ -294,7 +294,7 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         # print('star_t:', star_t)
         # print('star_opt:', star_opt)
         # print('Output:', output)
-        print('Date:', date)
+        # print('Date:', date)
 
         review_sample = pd.DataFrame(review, columns=['review'])
         avg = round(np.mean(output), 1)
@@ -304,10 +304,11 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         self.menu_pre(menu)  # menu top 5 시각화(pie chart)
         self.star_pre(star_opt)  # 항목별 별점 레이더 차트
         self.match_pie(df, output)  # 불일치 댓글 예시
-        self.star_compare(star_t, output, date)  # 별점/학습 별점 차이 라인 그래프
         self.pos_neg_pie(output)  # 긍정/부정 파이차트
         self.bar_chart(star_t, output)  # 일치/불일치 비율 바 그래프
         self.star_stack(star_t, output)
+        # self.star_compare(star_t, output, date)  # 별점/학습 별점 차이 라인 그래프
+        self.month_star_compare(star_t, output, date)  # 월별 별점/학습 별점 평균 추이 라인 그래프
 
         self.comboBox.addItem("5")
         self.comboBox.addItem("4")
@@ -522,6 +523,48 @@ class Second_Window(QDialog, QWidget, form_class2):  # class name 변경
         plt.savefig('pie.png')
         plt.clf()
         self.graphicsView_8.setStyleSheet("border-image:url(\'./pie.png');")
+
+    # 월별 별점/학습별점 평균 추이 라인 그래프
+    def month_star_compare(self, stars, pred_review, date):
+        print('month star compare')
+        line_df = pd.DataFrame({'Total Star': stars, 'Output': pred_review, 'Date':date})
+        # line_df = pd.DataFrame()
+        line_df['Total Star'] = [len(a) for a in line_df['Total Star']]
+        line_df['Output'] = [math.trunc(a) for a in line_df['Output']]
+        line_df['Date'] = [a.replace("년 ", "-") for a in line_df['Date']]
+        line_df['Date'] = [a.replace("월", "") for a in line_df['Date']]
+
+        line_df['datetime'] = pd.to_datetime(line_df['Date'])
+        line_df.sort_values(by=['datetime'], inplace=True, ascending=False)
+        line_df['Dates'] = [a[5:] for a in line_df['Date']]
+
+        star_avg = []
+        pred_star_avg = []
+
+        print('1')
+        for i in range(1, 13):
+            stars = len(line_df.loc[(line_df['Dates'] == str(i))])  # 월별 리뷰 갯수
+            star_sum = sum(line_df['Total Star'].loc[(line_df['Dates'] == str(i))])  # 리뷰 별점 총합
+            pred_sum = sum(line_df['Output'].loc[(line_df['Dates'] == str(i))])  # 학습 별점 총합
+            star_avg.append(round(star_sum / stars, 2))
+            pred_star_avg.append(round(pred_sum / stars, 2))
+
+        print('t')
+        x = ['2022.08', '2022.09', '2022.10', '2022.11', '2022.12', '2021.01', '2021.02',
+             '2021.03', '2021.04', '2021.05', '2021.06', '2021.07', ]
+
+        plt.figure(figsize=(10, 5))
+        plt.plot(x, star_avg, label='review avg per month')
+        plt.plot(x, pred_star_avg, label='ML avg per month')
+        plt.xlabel('Month')
+        plt.ylabel('Star Point')
+        plt.ylim(0, 6)
+        plt.legend(loc="lower right")
+
+        # plt 이미지 저장
+        plt.savefig('line_compare.png')
+        plt.clf()
+        self.graphicsView_8.setStyleSheet("border-image:url(\'./line_compare.png');")
 
     # 긍정/부정 댓글 파이 그래프
     def pos_neg_pie(self, pred_review):
