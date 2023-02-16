@@ -18,9 +18,8 @@
 #### [프로그램 실행]</br>
 <b> - Gui_starter4.py </b>
   위에서 생성한 CSV 파일 기반 시각화 프로그램 실행 파일
-
   
-#### [pip install list]</br>
+  
 <details>
 <summary>[pip install list]</summary>
 <div markdown="1">
