@@ -21,6 +21,10 @@
 
   
 #### [pip install list]</br>
+<details>
+<summary>[pip install list]</summary>
+<div markdown="1">
+
 pip install sentence_transformers==2.2.2</br>
 pip install keras==2.10.0</br>
 pip install tensorflow==2.10.0</br>
@@ -32,6 +36,11 @@ pip install wordcloud==1.8.2.2</br>
 pip install matplotlib==3.6.0</br>
 pip install pyqt5-tools</br>
 pip install JPype1==1.3.0</br>
+
+</div>
+</details>
+
+
 
 #### [GUI 화면 GIF]</br>
 <img width="50%" src="https://user-images.githubusercontent.com/95171615/193236626-4424f5e3-6bcb-44c2-a7f8-69ac2c7d6900.gif"/>
